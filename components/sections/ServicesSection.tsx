@@ -149,7 +149,7 @@ function ServicesPanel({
       aria-labelledby={labelledBy}
       className={`mt-14 ${active ? "block" : "hidden"}`}
     >
-      <div className="grid gap-12 lg:grid-cols-[1fr_1fr]">
+      <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:gap-12">
         <div>
           <h3
             className="reveal font-display text-[22px] font-bold tracking-[-0.5px]"
@@ -179,7 +179,7 @@ function ServicesPanel({
           return (
             <article
               key={card.title}
-              className={`reveal ${index ? `delay-${(index % 4) + 1}` : ""} relative overflow-hidden rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-7 transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0.75 before:origin-left before:scale-x-0 before:bg-(--nl-green) before:transition-transform hover:-translate-y-1 hover:border-(--nl-green) hover:shadow-(--nl-shadow-md) hover:before:scale-x-100`}
+              className={`reveal ${index ? `delay-${(index % 4) + 1}` : ""} relative overflow-hidden rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-6 transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0.75 before:origin-left before:scale-x-0 before:bg-(--nl-green) before:transition-transform hover:-translate-y-1 hover:border-(--nl-green) hover:shadow-(--nl-shadow-md) hover:before:scale-x-100 sm:p-7`}
               itemScope
               itemType="https://schema.org/Service"
             >
@@ -248,7 +248,7 @@ export default function ServicesSection() {
         </div>
 
         <div
-          className="mt-14 flex flex-wrap gap-2 border-b-2 border-(--nl-border)"
+          className="mt-10 flex flex-nowrap gap-2 overflow-x-auto border-b-2 border-(--nl-border) pb-2 md:mt-14 md:flex-wrap md:overflow-visible md:pb-0"
           role="tablist"
         >
           <button
@@ -257,7 +257,7 @@ export default function ServicesSection() {
             id="tab-tech"
             aria-selected={activeTab === "tech"}
             aria-controls="panel-tech"
-            className={`border-b-[3px] px-6 py-3 text-[15px] font-semibold transition-colors ${
+            className={`border-b-[3px] px-4 py-3 text-[14px] font-semibold transition-colors sm:px-6 sm:text-[15px] ${
               activeTab === "tech"
                 ? "border-(--nl-green) text-(--nl-green)"
                 : "border-transparent text-(--nl-text-muted) hover:text-(--nl-text-primary)"
@@ -272,7 +272,7 @@ export default function ServicesSection() {
             id="tab-mkt"
             aria-selected={activeTab === "mkt"}
             aria-controls="panel-mkt"
-            className={`border-b-[3px] px-6 py-3 text-[15px] font-semibold transition-colors ${
+            className={`border-b-[3px] px-4 py-3 text-[14px] font-semibold transition-colors sm:px-6 sm:text-[15px] ${
               activeTab === "mkt"
                 ? "border-(--nl-green) text-(--nl-green)"
                 : "border-transparent text-(--nl-text-muted) hover:text-(--nl-text-primary)"

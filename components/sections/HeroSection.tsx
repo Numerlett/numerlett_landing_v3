@@ -3,17 +3,17 @@ import Container from "@/components/Container";
 export default function HeroSection() {
   return (
     <header
-      className="relative overflow-hidden bg-white pt-25 pb-20"
+      className="relative overflow-hidden bg-white pb-16 pt-18 sm:pb-20 sm:pt-22 lg:pt-25"
       role="banner"
       aria-labelledby="hero-heading"
     >
       <div className="hero-pattern absolute inset-0" aria-hidden="true" />
       <div
-        className="hero-grad absolute -right-50 -top-50 h-175 w-175"
+        className="hero-grad absolute -right-24 -top-24 h-120 w-120 sm:-right-40 sm:-top-40 sm:h-150 sm:w-150 lg:-right-50 lg:-top-50 lg:h-175 lg:w-175"
         aria-hidden="true"
       />
       <Container>
-        <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div className="relative">
             <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-(--nl-green)">
               <span
@@ -24,7 +24,7 @@ export default function HeroSection() {
             </div>
             <h1
               id="hero-heading"
-              className="reveal delay-1 mt-4 font-display text-[clamp(52px,7vw,84px)] font-black leading-none tracking-[-3px] text-(--nl-text-primary)"
+              className="reveal delay-1 mt-4 font-display text-[clamp(40px,8vw,84px)] font-black leading-none tracking-[-3px] text-(--nl-text-primary)"
             >
               Where <span className="text-(--nl-green)">Smart</span>
               <br />
@@ -41,18 +41,18 @@ export default function HeroSection() {
             <div className="reveal delay-3 mt-10 flex flex-wrap items-center gap-4">
               <a
                 href="#services"
-                className="inline-flex items-center gap-2 rounded-(--nl-radius-sm) border-2 border-(--nl-green) bg-(--nl-green) px-9 py-4 text-[15.5px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-(--nl-green-dark) hover:shadow-(--nl-shadow-green)"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-(--nl-radius-sm) border-2 border-(--nl-green) bg-(--nl-green) px-9 py-4 text-[15.5px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-(--nl-green-dark) hover:shadow-(--nl-shadow-green) sm:w-auto"
               >
                 Explore Services <span className="text-base">→</span>
               </a>
               <a
                 href="#seed"
-                className="inline-flex items-center gap-2 rounded-(--nl-radius-sm) border-2 border-(--nl-border-dark) px-9 py-4 text-[15.5px] font-semibold text-(--nl-text-primary) transition-all hover:-translate-y-0.5 hover:border-(--nl-green) hover:text-(--nl-green)"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-(--nl-radius-sm) border-2 border-(--nl-border-dark) px-9 py-4 text-[15.5px] font-semibold text-(--nl-text-primary) transition-all hover:-translate-y-0.5 hover:border-(--nl-green) hover:text-(--nl-green) sm:w-auto"
               >
                 View SEED Product
               </a>
             </div>
-            <div className="reveal delay-4 mt-16 flex flex-wrap items-center gap-8 border-t border-(--nl-border) pt-8">
+            <div className="reveal delay-4 mt-12 flex flex-col gap-4 border-t border-(--nl-border) pt-8 sm:mt-16 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8">
               <span className="font-mono text-[12px] uppercase tracking-[0.08em] text-(--nl-text-muted)">
                 Trusted by
               </span>
@@ -73,7 +73,7 @@ export default function HeroSection() {
 
           <div className="reveal-right delay-2 flex justify-center lg:justify-end">
             <div
-              className="float-y w-full max-w-105 rounded-(--nl-radius-lg) border border-(--nl-border) bg-white p-6 shadow-(--nl-shadow-lg)"
+              className="float-y w-full max-w-full rounded-(--nl-radius-lg) border border-(--nl-border) bg-white p-6 shadow-(--nl-shadow-lg) sm:max-w-105"
               role="img"
               aria-label="NumerLett analytics dashboard preview"
             >
@@ -87,7 +87,7 @@ export default function HeroSection() {
                   NumerLett — Dashboard
                 </span>
               </div>
-              <div className="mb-4 grid grid-cols-3 gap-2.5">
+              <div className="mb-4 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
                 <div className="rounded-[10px] bg-(--nl-grey-light) p-3">
                   <div className="font-mono text-[10px] tracking-[0.04em] text-(--nl-text-muted)">
                     Revenue

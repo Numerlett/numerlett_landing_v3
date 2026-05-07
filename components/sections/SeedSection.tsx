@@ -37,20 +37,20 @@ const features = [
 export default function SeedSection() {
   return (
     <section
-      className="relative overflow-hidden bg-black py-32 text-white"
+      className="relative overflow-hidden bg-black py-20 text-white sm:py-24 lg:py-32"
       id="seed"
       aria-labelledby="seed-heading"
       itemScope
       itemType="https://schema.org/SoftwareApplication"
     >
       <span
-        className="pointer-events-none absolute -bottom-10 -right-10 font-display text-[280px] font-black leading-none tracking-[-10px] text-white/5"
+        className="pointer-events-none absolute -bottom-6 -right-6 font-display text-[160px] font-black leading-none tracking-[-10px] text-white/5 sm:-bottom-10 sm:-right-10 sm:text-[220px] lg:text-[280px]"
         aria-hidden="true"
       >
         SEED
       </span>
       <Container>
-        <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr]">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
             <div className="reveal inline-flex items-center gap-2 rounded-full border border-[rgba(51,175,145,0.3)] bg-[rgba(51,175,145,0.15)] px-4 py-1 text-[12px] font-mono uppercase tracking-[0.06em] text-(--nl-green)">
               <span
@@ -108,13 +108,13 @@ export default function SeedSection() {
             <div className="reveal delay-3 mt-8 flex flex-wrap gap-4">
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-(--nl-radius-sm) border-2 border-(--nl-green) bg-(--nl-green) px-9 py-4 text-[15.5px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-(--nl-green-dark)"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-(--nl-radius-sm) border-2 border-(--nl-green) bg-(--nl-green) px-9 py-4 text-[15.5px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-(--nl-green-dark) sm:w-auto"
               >
                 Request a Demo <span className="text-base">→</span>
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-(--nl-radius-sm) border-2 border-(--nl-green) px-9 py-4 text-[15.5px] font-semibold text-(--nl-green) transition-all hover:-translate-y-0.5 hover:bg-(--nl-green) hover:text-white"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-(--nl-radius-sm) border-2 border-(--nl-green) px-9 py-4 text-[15.5px] font-semibold text-(--nl-green) transition-all hover:-translate-y-0.5 hover:bg-(--nl-green) hover:text-white sm:w-auto"
               >
                 Get Pricing
               </a>
@@ -188,89 +188,91 @@ export default function SeedSection() {
                   </div>
                 </div>
 
-                <div className="overflow-hidden rounded-[10px] border border-white/10 bg-white/5">
-                  <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] border-b border-white/10 bg-white/5 px-4 py-2">
-                    {"Product,SKU,Stock,Value,Status"
-                      .split(",")
-                      .map((header) => (
-                        <span
-                          key={header}
-                          className="font-mono text-[10px] uppercase tracking-[0.06em] text-white/40"
-                        >
-                          {header}
-                        </span>
-                      ))}
-                  </div>
-                  {[
-                    {
-                      name: "Premium Widget A",
-                      sku: "NL-0041",
-                      stock: "1,240",
-                      value: "₹4.8L",
-                      status: "In Stock",
-                      color: "text-(--nl-green)",
-                      bg: "bg-[rgba(51,175,145,0.2)]",
-                    },
-                    {
-                      name: "Component Pack B",
-                      sku: "NL-0088",
-                      stock: "38",
-                      value: "₹12.4K",
-                      status: "Low",
-                      color: "text-[#ffa032]",
-                      bg: "bg-[rgba(255,160,50,0.2)]",
-                    },
-                    {
-                      name: "Industrial Kit C",
-                      sku: "NL-0124",
-                      stock: "892",
-                      value: "₹2.1L",
-                      status: "In Stock",
-                      color: "text-(--nl-green)",
-                      bg: "bg-[rgba(51,175,145,0.2)]",
-                    },
-                    {
-                      name: "Module XR-9",
-                      sku: "NL-0201",
-                      stock: "0",
-                      value: "₹0",
-                      status: "Out of Stock",
-                      color: "text-[#ff5050]",
-                      bg: "bg-[rgba(255,80,80,0.2)]",
-                    },
-                    {
-                      name: "Smart Sensor Pro",
-                      sku: "NL-0312",
-                      stock: "312",
-                      value: "₹9.8L",
-                      status: "In Stock",
-                      color: "text-(--nl-green)",
-                      bg: "bg-[rgba(51,175,145,0.2)]",
-                    },
-                  ].map((row) => (
-                    <div
-                      key={row.sku}
-                      className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center border-b border-white/5 px-4 py-2 last:border-b-0"
-                    >
-                      <span className="font-mono text-[12px] font-semibold text-white/90">
-                        {row.name}
-                      </span>
-                      <span className="font-mono text-[12px] text-white/70">
-                        {row.sku}
-                      </span>
-                      <span className="font-mono text-[12px] text-white/70">
-                        {row.stock}
-                      </span>
-                      <span className="font-mono text-[12px] text-white/70">
-                        {row.value}
-                      </span>
-                      <span
-                        className={`inline-flex w-fit items-center rounded px-2 py-0.5 font-mono text-[10px] font-bold ${row.bg} ${row.color}`}
-                      >
-                        {row.status}
-                      </span>
+                <div className="overflow-x-auto rounded-[10px] border border-white/10 bg-white/5">
+                  <div className="min-w-160">
+                    <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] border-b border-white/10 bg-white/5 px-4 py-2">
+                      {"Product,SKU,Stock,Value,Status"
+                        .split(",")
+                        .map((header) => (
+                          <span
+                            key={header}
+                            className="font-mono text-[10px] uppercase tracking-[0.06em] text-white/40"
+                          >
+                            {header}
+                          </span>
+                        ))}
                     </div>
-                  ))}
+                    {[
+                      {
+                        name: "Premium Widget A",
+                        sku: "NL-0041",
+                        stock: "1,240",
+                        value: "₹4.8L",
+                        status: "In Stock",
+                        color: "text-(--nl-green)",
+                        bg: "bg-[rgba(51,175,145,0.2)]",
+                      },
+                      {
+                        name: "Component Pack B",
+                        sku: "NL-0088",
+                        stock: "38",
+                        value: "₹12.4K",
+                        status: "Low",
+                        color: "text-[#ffa032]",
+                        bg: "bg-[rgba(255,160,50,0.2)]",
+                      },
+                      {
+                        name: "Industrial Kit C",
+                        sku: "NL-0124",
+                        stock: "892",
+                        value: "₹2.1L",
+                        status: "In Stock",
+                        color: "text-(--nl-green)",
+                        bg: "bg-[rgba(51,175,145,0.2)]",
+                      },
+                      {
+                        name: "Module XR-9",
+                        sku: "NL-0201",
+                        stock: "0",
+                        value: "₹0",
+                        status: "Out of Stock",
+                        color: "text-[#ff5050]",
+                        bg: "bg-[rgba(255,80,80,0.2)]",
+                      },
+                      {
+                        name: "Smart Sensor Pro",
+                        sku: "NL-0312",
+                        stock: "312",
+                        value: "₹9.8L",
+                        status: "In Stock",
+                        color: "text-(--nl-green)",
+                        bg: "bg-[rgba(51,175,145,0.2)]",
+                      },
+                    ].map((row) => (
+                      <div
+                        key={row.sku}
+                        className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center border-b border-white/5 px-4 py-2 last:border-b-0"
+                      >
+                        <span className="font-mono text-[12px] font-semibold text-white/90">
+                          {row.name}
+                        </span>
+                        <span className="font-mono text-[12px] text-white/70">
+                          {row.sku}
+                        </span>
+                        <span className="font-mono text-[12px] text-white/70">
+                          {row.stock}
+                        </span>
+                        <span className="font-mono text-[12px] text-white/70">
+                          {row.value}
+                        </span>
+                        <span
+                          className={`inline-flex w-fit items-center rounded px-2 py-0.5 font-mono text-[10px] font-bold ${row.bg} ${row.color}`}
+                        >
+                          {row.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

@@ -70,7 +70,7 @@ export default function ProcessSection() {
                 key={step.number}
                 className={`reveal ${index ? `delay-${index}` : ""} relative px-4`}
               >
-                <div className="mx-auto mb-5 flex h-18 w-18 items-center justify-center rounded-full border-2 border-(--nl-green) bg-white font-display text-[22px] font-black text-(--nl-green) shadow-(--nl-shadow-green) transition-all hover:bg-(--nl-green) hover:text-white">
+                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full border-2 border-(--nl-green) bg-white font-display text-[20px] font-black text-(--nl-green) shadow-(--nl-shadow-green) transition-all hover:bg-(--nl-green) hover:text-white sm:h-18 sm:w-18 sm:text-[22px]">
                   {step.number}
                 </div>
                 <h4 className="font-display text-[15px] font-bold">

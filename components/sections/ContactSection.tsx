@@ -14,7 +14,7 @@ export default function ContactSection() {
       aria-labelledby="contact-heading"
     >
       <Container>
-        <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr]">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
             <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-(--nl-green)">
               <span
@@ -108,7 +108,7 @@ export default function ContactSection() {
           </div>
 
           <div className="reveal-right delay-2">
-            <div className="rounded-(--nl-radius-lg) border border-(--nl-border) bg-(--nl-grey-light) p-10">
+            <div className="rounded-(--nl-radius-lg) border border-(--nl-border) bg-(--nl-grey-light) p-6 sm:p-8 lg:p-10">
               <h3 className="font-display text-[22px] font-bold tracking-[-0.5px]">
                 Send Us a Message
               </h3>

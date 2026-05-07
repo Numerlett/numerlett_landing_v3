@@ -110,7 +110,7 @@ export default function CaseStudiesSection() {
                   {item.imageLabel}
                 </span>
               </div>
-              <div className="p-7">
+              <div className="p-6 sm:p-7">
                 <span
                   className="inline-block rounded bg-(--nl-green-light) px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.06em] text-(--nl-green)"
                   itemProp="keywords"

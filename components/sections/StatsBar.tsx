@@ -19,9 +19,9 @@ export default function StatsBar() {
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className={`reveal ${index ? `delay-${index}` : ""} border-r border-white/10 px-6 text-center last:border-r-0`}
+              className={`reveal ${index ? `delay-${index}` : ""} border-b border-white/10 px-4 text-center last:border-b-0 sm:px-6 md:border-b-0 md:border-r md:last:border-r-0`}
             >
-              <div className="font-display text-[52px] font-black leading-none tracking-[-2.5px] text-white">
+              <div className="font-display text-[40px] font-black leading-none tracking-[-2.5px] text-white sm:text-[52px]">
                 <span className="text-(--nl-green)" data-count={stat.value}>
                   0
                 </span>

@@ -22,9 +22,9 @@ export default function MainNav() {
       aria-label="Main navigation"
       itemScope
       itemType="https://schema.org/SiteNavigationElement"
-      className="sticky top-0 z-50 h-(--nl-nav-h) border-b border-(--nl-border) bg-white/95 backdrop-blur"
+      className="sticky top-0 z-50 h-auto border-b border-(--nl-border) bg-white/95 py-3 backdrop-blur md:h-(--nl-nav-h) md:py-0"
     >
-      <Container className="flex h-full items-center justify-between gap-8">
+      <Container className="flex w-full flex-col items-start gap-4 md:h-full md:flex-row md:items-center md:justify-between md:gap-8">
         <a
           href="/"
           className="font-display text-[24px] font-extrabold tracking-tight"
@@ -37,13 +37,13 @@ export default function MainNav() {
         </a>
 
         <ul
-          className="flex flex-1 items-center justify-center gap-1"
+          className="flex w-full flex-wrap items-center justify-start gap-2 md:w-auto md:flex-1 md:justify-center md:gap-1"
           role="list"
         >
           <li className="group relative">
             <a
               href="#services"
-              className="flex items-center gap-1 rounded-md px-3.5 py-2 text-[14px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary)"
+              className="flex items-center gap-1 rounded-md px-3.5 py-2 text-[13px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary) md:text-[14px]"
               aria-haspopup="true"
               aria-expanded="false"
             >
@@ -51,7 +51,7 @@ export default function MainNav() {
               <ChevronDown className="h-3 w-3 transition-transform group-hover:rotate-180" />
             </a>
             <div
-              className="absolute left-1/2 top-[calc(100%+8px)] hidden w-170 -translate-x-1/2 grid-cols-2 gap-8 rounded-(--nl-radius-lg) border border-(--nl-border) bg-white p-8 shadow-(--nl-shadow-lg) group-hover:grid"
+              className="absolute left-1/2 top-[calc(100%+8px)] hidden w-170 -translate-x-1/2 grid-cols-2 gap-8 rounded-(--nl-radius-lg) border border-(--nl-border) bg-white p-8 shadow-(--nl-shadow-lg) lg:group-hover:grid"
               role="menu"
               aria-label="Services submenu"
             >
@@ -211,7 +211,7 @@ export default function MainNav() {
           <li className="group relative">
             <a
               href="#seed"
-              className="flex items-center gap-1 rounded-md px-3.5 py-2 text-[14px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary)"
+              className="flex items-center gap-1 rounded-md px-3.5 py-2 text-[13px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary) md:text-[14px]"
               aria-haspopup="true"
               aria-expanded="false"
             >
@@ -219,7 +219,7 @@ export default function MainNav() {
               <ChevronDown className="h-3 w-3 transition-transform group-hover:rotate-180" />
             </a>
             <div
-              className="absolute left-0 top-[calc(100%+8px)] hidden w-55 rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-2 shadow-(--nl-shadow-md) group-hover:block"
+              className="absolute left-0 top-[calc(100%+8px)] hidden w-55 rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-2 shadow-(--nl-shadow-md) lg:group-hover:block"
               role="menu"
             >
               <a
@@ -252,7 +252,7 @@ export default function MainNav() {
           <li>
             <a
               href="#cases"
-              className="rounded-md px-3.5 py-2 text-[14px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary)"
+              className="rounded-md px-3.5 py-2 text-[13px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary) md:text-[14px]"
             >
               Case Studies
             </a>
@@ -260,7 +260,7 @@ export default function MainNav() {
           <li>
             <a
               href="#blog"
-              className="rounded-md px-3.5 py-2 text-[14px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary)"
+              className="rounded-md px-3.5 py-2 text-[13px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary) md:text-[14px]"
             >
               Insights
             </a>
@@ -268,7 +268,7 @@ export default function MainNav() {
           <li>
             <a
               href="#faq"
-              className="rounded-md px-3.5 py-2 text-[14px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary)"
+              className="rounded-md px-3.5 py-2 text-[13px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary) md:text-[14px]"
             >
               About
             </a>
@@ -276,23 +276,23 @@ export default function MainNav() {
           <li>
             <a
               href="#contact"
-              className="rounded-md px-3.5 py-2 text-[14px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary)"
+              className="rounded-md px-3.5 py-2 text-[13px] font-medium text-(--nl-text-secondary) transition-colors hover:bg-(--nl-grey-light) hover:text-(--nl-text-primary) md:text-[14px]"
             >
               Contact
             </a>
           </li>
         </ul>
 
-        <div className="flex items-center gap-3">
+        <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center md:w-auto">
           <a
             href="tel:+918000000000"
-            className="flex items-center gap-2 rounded-md border border-(--nl-border-dark) px-4 py-2 text-[13px] font-semibold text-(--nl-text-primary) transition-all hover:-translate-y-0.5 hover:border-(--nl-green) hover:text-(--nl-green)"
+            className="flex w-full items-center justify-center gap-2 rounded-md border border-(--nl-border-dark) px-4 py-2 text-[13px] font-semibold text-(--nl-text-primary) transition-all hover:-translate-y-0.5 hover:border-(--nl-green) hover:text-(--nl-green) sm:w-auto"
           >
             <Phone className="h-4 w-4" /> Call Us
           </a>
           <a
             href="#contact"
-            className="flex items-center gap-2 rounded-md border border-(--nl-green) bg-(--nl-green) px-4 py-2 text-[13px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-(--nl-green-dark)"
+            className="flex w-full items-center justify-center gap-2 rounded-md border border-(--nl-green) bg-(--nl-green) px-4 py-2 text-[13px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-(--nl-green-dark) sm:w-auto"
           >
             Get Started <span className="text-base">→</span>
           </a>

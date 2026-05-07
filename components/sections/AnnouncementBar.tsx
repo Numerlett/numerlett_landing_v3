@@ -1,7 +1,7 @@
 export default function AnnouncementBar() {
   return (
     <div
-      className="bg-(--nl-green) px-6 py-2 text-center text-[13px] font-medium text-white"
+      className="bg-(--nl-green) px-4 py-2 text-center text-[12px] font-medium leading-snug text-white sm:px-6 sm:text-[13px]"
       role="banner"
     >
       <span aria-hidden="true">🚀</span>

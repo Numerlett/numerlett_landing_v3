@@ -74,7 +74,7 @@ export default function IndustriesSection() {
           {industries.map((industry, index) => (
             <div
               key={industry.title}
-              className={`reveal ${index ? `delay-${(index % 3) + 1}` : ""} flex gap-5 rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-8 transition-all hover:border-(--nl-green) hover:shadow-(--nl-shadow-md)`}
+              className={`reveal ${index ? `delay-${(index % 3) + 1}` : ""} flex gap-5 rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-6 transition-all hover:border-(--nl-green) hover:shadow-(--nl-shadow-md) sm:p-8`}
             >
               <div className="text-[32px]" aria-hidden="true">
                 {industry.icon}

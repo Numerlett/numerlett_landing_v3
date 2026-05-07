@@ -44,7 +44,7 @@ export default function WhySection() {
       aria-labelledby="why-heading"
     >
       <Container>
-        <div className="grid gap-16 lg:grid-cols-[1fr_1fr]">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <div>
             <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-(--nl-green)">
               <span
@@ -90,7 +90,7 @@ export default function WhySection() {
 
           <div className="reveal-right delay-2">
             <div
-              className="rounded-(--nl-radius-xl) border border-(--nl-border) bg-white p-10 shadow-(--nl-shadow-md)"
+              className="rounded-(--nl-radius-xl) border border-(--nl-border) bg-white p-6 shadow-(--nl-shadow-md) sm:p-8 lg:p-10"
               data-skill-block
             >
               <div className="font-display text-[15px] font-bold text-(--nl-text-secondary)">
@@ -114,7 +114,7 @@ export default function WhySection() {
                   </div>
                 ))}
               </div>
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-(--nl-radius-md) border border-(--nl-green-mid) bg-(--nl-green-light) px-5 py-4">
+              <div className="mt-8 flex flex-col items-start gap-4 rounded-(--nl-radius-md) border border-(--nl-green-mid) bg-(--nl-green-light) px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                 <span className="text-[14px] font-semibold text-(--nl-green-dark)">
                   Ready to see what's possible for your business?
                 </span>

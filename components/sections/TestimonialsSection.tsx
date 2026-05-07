@@ -61,7 +61,7 @@ export default function TestimonialsSection() {
           {testimonials.map((testimonial, index) => (
             <blockquote
               key={testimonial.name}
-              className={`reveal ${index ? `delay-${index + 1}` : ""} rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-8 transition-all hover:border-(--nl-green-mid) hover:shadow-(--nl-shadow-md)`}
+              className={`reveal ${index ? `delay-${index + 1}` : ""} rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-6 transition-all hover:border-(--nl-green-mid) hover:shadow-(--nl-shadow-md) sm:p-8`}
               itemScope
               itemType="https://schema.org/Review"
             >
