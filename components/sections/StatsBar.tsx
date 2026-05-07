@@ -1,33 +1,29 @@
-import Container from "@/components/Container";
+import Container from '@/components/Container'
 
 const stats = [
-  { value: 50, suffix: "+", label: "Clients Served Globally" },
-  { value: 10, suffix: "+", label: "Years Combined Experience" },
-  { value: 98, suffix: "%", label: "Client Satisfaction Rate" },
-  { value: 4, suffix: "x", label: "Average ROI Delivered" },
-];
+  { value: 50, suffix: '+', label: 'Clients Served Globally' },
+  { value: 10, suffix: '+', label: 'Years Combined Experience' },
+  { value: 98, suffix: '%', label: 'Client Satisfaction Rate' },
+  { value: 4, suffix: 'x', label: 'Average ROI Delivered' },
+]
 
 export default function StatsBar() {
   return (
-    <section
-      className="bg-black py-14"
-      aria-label="NumerLett key statistics"
-      data-stats
-    >
+    <section className="bg-black py-14" aria-label="NumerLett key statistics" data-stats>
       <Container>
         <div className="grid grid-cols-2 gap-y-8 md:grid-cols-4">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className={`reveal ${index ? `delay-${index}` : ""} border-b border-white/10 px-4 text-center last:border-b-0 sm:px-6 md:border-b-0 md:border-r md:last:border-r-0`}
+              className={`reveal ${index ? `delay-${index}` : ''} border-b border-white/10 px-4 text-center last:border-b-0 sm:px-6 md:border-r md:border-b-0 md:last:border-r-0`}
             >
               <div className="font-display text-[40px] font-black leading-none tracking-[-2.5px] text-white sm:text-[52px]">
-                <span className="text-(--nl-green)" data-count={stat.value}>
+                <span className="text-primary" data-count={stat.value}>
                   0
                 </span>
                 {stat.suffix}
               </div>
-              <div className="mt-2 text-[13px] tracking-[0.04em] text-(--nl-grey)">
+              <div className="mt-2 text-[13px] tracking-[0.04em] text-text-muted">
                 {stat.label}
               </div>
             </div>
@@ -35,5 +31,5 @@ export default function StatsBar() {
         </div>
       </Container>
     </section>
-  );
+  )
 }

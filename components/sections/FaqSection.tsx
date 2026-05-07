@@ -4,7 +4,9 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import Container from "@/components/Container";
 
-const faqs = [
+type Faq = { question: string; answer: string };
+
+const faqs: Faq[] = [
   {
     question: "What technology services does NumerLett offer?",
     answer:
@@ -41,15 +43,12 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="bg-white py-24" id="faq" aria-labelledby="faq-heading">
+    <section className="bg-background py-24" id="faq" aria-labelledby="faq-heading">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.6fr]">
           <div>
-            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-(--nl-green)">
-              <span
-                className="h-0.5 w-6 rounded bg-(--nl-green)"
-                aria-hidden="true"
-              />
+            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-primary">
+              <span className="h-0.5 w-6 rounded bg-primary" aria-hidden="true" />
               FAQ
             </div>
             <h2
@@ -62,9 +61,9 @@ export default function FaqSection() {
               <br />
               Answers.
             </h2>
-            <p className="reveal delay-2 mt-4 text-[15px] font-light leading-[1.75] text-(--nl-text-secondary)">
+            <p className="reveal delay-2 mt-4 text-[15px] font-light leading-[1.75] text-muted-foreground">
               Can't find what you need?{" "}
-              <a href="#contact" className="font-semibold text-(--nl-green)">
+              <a href="#contact" className="font-semibold text-primary">
                 Talk to our team
               </a>{" "}
               — no sales pitch, just honest answers.
@@ -72,26 +71,21 @@ export default function FaqSection() {
           </div>
 
           <div className="reveal delay-1">
-            <div className="border-t border-(--nl-border)">
+            <div className="border-t border-border">
               {faqs.map((faq, index) => {
                 const isOpen = openIndex === index;
                 return (
-                  <div
-                    key={faq.question}
-                    className="border-b border-(--nl-border)"
-                  >
+                  <div key={faq.question} className="border-b border-border">
                     <button
                       type="button"
-                      className="flex w-full items-center justify-between gap-4 py-5 text-left font-display text-[15px] font-semibold transition-colors hover:text-(--nl-green)"
+                      className="font-display flex w-full items-center justify-between gap-4 py-5 text-left text-[15px] font-semibold transition-colors hover:text-primary"
                       onClick={() => setOpenIndex(isOpen ? -1 : index)}
                       aria-expanded={isOpen}
                     >
                       {faq.question}
                       <span
-                        className={`flex h-7 w-7 items-center justify-center rounded-full border border-(--nl-border-dark) text-(--nl-text-muted) transition-all ${
-                          isOpen
-                            ? "rotate-45 border-(--nl-green) bg-(--nl-green) text-white"
-                            : ""
+                        className={`flex h-7 w-7 items-center justify-center rounded-full border border-border-dark text-text-muted transition-all ${
+                          isOpen ? "rotate-45 border-primary bg-primary text-primary-foreground" : ""
                         }`}
                         aria-hidden="true"
                       >
@@ -99,7 +93,7 @@ export default function FaqSection() {
                       </span>
                     </button>
                     {isOpen && (
-                      <div className="pb-5 text-[14.5px] font-light leading-[1.8] text-(--nl-text-secondary)">
+                      <div className="pb-5 text-[14.5px] font-light leading-[1.8] text-muted-foreground">
                         {faq.answer}
                       </div>
                     )}

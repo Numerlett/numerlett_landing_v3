@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Check, Clock, Lock, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import Container from "@/components/Container";
 
@@ -8,19 +8,12 @@ export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section
-      className="bg-white py-24"
-      id="contact"
-      aria-labelledby="contact-heading"
-    >
+    <section className="bg-background py-24" id="contact" aria-labelledby="contact-heading">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
-            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-(--nl-green)">
-              <span
-                className="h-0.5 w-6 rounded bg-(--nl-green)"
-                aria-hidden="true"
-              />
+            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-primary">
+              <span className="h-0.5 w-6 rounded bg-primary" aria-hidden="true" />
               Contact Us
             </div>
             <h2
@@ -31,84 +24,33 @@ export default function ContactSection() {
               <br />
               Something Big.
             </h2>
-            <p className="reveal delay-2 mt-4 text-[16px] font-light leading-[1.75] text-(--nl-text-secondary)">
-              Tell us what you need — tech, marketing, SEED, or all three. We'll
-              get back to you within 24 hours.
+            <p className="reveal delay-2 mt-4 text-[16px] font-light leading-[1.75] text-muted-foreground">
+              Tell us what you need — tech, marketing, SEED, or all three. We'll get back to you
+              within 24 hours.
             </p>
 
             <div className="reveal delay-2 mt-8 space-y-6">
-              <div className="flex gap-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-(--nl-green-mid) bg-(--nl-green-light)">
-                  <Mail
-                    className="h-5 w-5 text-(--nl-green)"
-                    aria-hidden="true"
-                  />
+              {[
+                { Icon: Mail, label: "Email", content: <a href="mailto:hello@numerlett.com" className="text-primary">hello@numerlett.com</a> },
+                { Icon: Phone, label: "Phone", content: <a href="tel:+918000000000" className="text-primary">+91 80000 00000</a> },
+                { Icon: MapPin, label: "Location", content: "Bengaluru, Karnataka, India" },
+                { Icon: Clock, label: "Response Time", content: "Within 24 hours · Mon–Sat" },
+              ].map(({ Icon, label, content }) => (
+                <div key={label} className="flex gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-primary-mid bg-accent">
+                    <Icon className="size-5 text-primary" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h5 className="font-display text-[14px] font-bold">{label}</h5>
+                    <p className="text-[13.5px] text-muted-foreground">{content}</p>
+                  </div>
                 </div>
-                <div>
-                  <h5 className="font-display text-[14px] font-bold">Email</h5>
-                  <p className="text-[13.5px] text-(--nl-text-secondary)">
-                    <a
-                      href="mailto:hello@numerlett.com"
-                      className="text-(--nl-green)"
-                    >
-                      hello@numerlett.com
-                    </a>
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-(--nl-green-mid) bg-(--nl-green-light)">
-                  <Phone
-                    className="h-5 w-5 text-(--nl-green)"
-                    aria-hidden="true"
-                  />
-                </div>
-                <div>
-                  <h5 className="font-display text-[14px] font-bold">Phone</h5>
-                  <p className="text-[13.5px] text-(--nl-text-secondary)">
-                    <a href="tel:+918000000000" className="text-(--nl-green)">
-                      +91 80000 00000
-                    </a>
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-(--nl-green-mid) bg-(--nl-green-light)">
-                  <MapPin
-                    className="h-5 w-5 text-(--nl-green)"
-                    aria-hidden="true"
-                  />
-                </div>
-                <div>
-                  <h5 className="font-display text-[14px] font-bold">
-                    Location
-                  </h5>
-                  <p className="text-[13.5px] text-(--nl-text-secondary)">
-                    Bengaluru, Karnataka, India
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-(--nl-green-mid) bg-(--nl-green-light)">
-                  <Clock
-                    className="h-5 w-5 text-(--nl-green)"
-                    aria-hidden="true"
-                  />
-                </div>
-                <div>
-                  <h5 className="font-display text-[14px] font-bold">
-                    Response Time
-                  </h5>
-                  <p className="text-[13.5px] text-(--nl-text-secondary)">
-                    Within 24 hours · Mon–Sat
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="reveal-right delay-2">
-            <div className="rounded-(--nl-radius-lg) border border-(--nl-border) bg-(--nl-grey-light) p-6 sm:p-8 lg:p-10">
+            <div className="rounded-brand-lg border border-border bg-muted p-6 sm:p-8 lg:p-10">
               <h3 className="font-display text-[22px] font-bold tracking-[-0.5px]">
                 Send Us a Message
               </h3>
@@ -117,7 +59,7 @@ export default function ContactSection() {
                   <div>
                     <label
                       htmlFor="fname"
-                      className="mb-2 block text-[13px] font-semibold text-(--nl-text-secondary)"
+                      className="mb-2 block text-[13px] font-semibold text-muted-foreground"
                     >
                       First Name *
                     </label>
@@ -128,13 +70,13 @@ export default function ContactSection() {
                       placeholder="Rahul"
                       required
                       autoComplete="given-name"
-                      className="w-full rounded-(--nl-radius-sm) border border-(--nl-border) bg-white px-4 py-3 text-[14px] text-(--nl-text-primary) outline-none transition focus:border-(--nl-green) focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
+                      className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="lname"
-                      className="mb-2 block text-[13px] font-semibold text-(--nl-text-secondary)"
+                      className="mb-2 block text-[13px] font-semibold text-muted-foreground"
                     >
                       Last Name *
                     </label>
@@ -145,14 +87,14 @@ export default function ContactSection() {
                       placeholder="Sharma"
                       required
                       autoComplete="family-name"
-                      className="w-full rounded-(--nl-radius-sm) border border-(--nl-border) bg-white px-4 py-3 text-[14px] text-(--nl-text-primary) outline-none transition focus:border-(--nl-green) focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
+                      className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
                     />
                   </div>
                 </div>
                 <div>
                   <label
                     htmlFor="email"
-                    className="mb-2 block text-[13px] font-semibold text-(--nl-text-secondary)"
+                    className="mb-2 block text-[13px] font-semibold text-muted-foreground"
                   >
                     Business Email *
                   </label>
@@ -163,13 +105,13 @@ export default function ContactSection() {
                     placeholder="rahul@company.com"
                     required
                     autoComplete="email"
-                    className="w-full rounded-(--nl-radius-sm) border border-(--nl-border) bg-white px-4 py-3 text-[14px] text-(--nl-text-primary) outline-none transition focus:border-(--nl-green) focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
+                    className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="phone"
-                    className="mb-2 block text-[13px] font-semibold text-(--nl-text-secondary)"
+                    className="mb-2 block text-[13px] font-semibold text-muted-foreground"
                   >
                     Phone Number
                   </label>
@@ -179,13 +121,13 @@ export default function ContactSection() {
                     name="phone"
                     placeholder="+91 98765 43210"
                     autoComplete="tel"
-                    className="w-full rounded-(--nl-radius-sm) border border-(--nl-border) bg-white px-4 py-3 text-[14px] text-(--nl-text-primary) outline-none transition focus:border-(--nl-green) focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
+                    className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="service"
-                    className="mb-2 block text-[13px] font-semibold text-(--nl-text-secondary)"
+                    className="mb-2 block text-[13px] font-semibold text-muted-foreground"
                   >
                     Service Interested In *
                   </label>
@@ -194,7 +136,7 @@ export default function ContactSection() {
                     name="service"
                     required
                     defaultValue=""
-                    className="w-full rounded-(--nl-radius-sm) border border-(--nl-border) bg-white px-4 py-3 text-[14px] text-(--nl-text-primary) outline-none transition focus:border-(--nl-green) focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
+                    className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
                   >
                     <option value="" disabled>
                       Select a service…
@@ -227,7 +169,7 @@ export default function ContactSection() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="mb-2 block text-[13px] font-semibold text-(--nl-text-secondary)"
+                    className="mb-2 block text-[13px] font-semibold text-muted-foreground"
                   >
                     Tell Us About Your Project
                   </label>
@@ -235,7 +177,7 @@ export default function ContactSection() {
                     id="message"
                     name="message"
                     placeholder="Brief description of your project, goals, timeline, and any specific requirements…"
-                    className="min-h-25 w-full resize-y rounded-(--nl-radius-sm) border border-(--nl-border) bg-white px-4 py-3 text-[14px] text-(--nl-text-primary) outline-none transition focus:border-(--nl-green) focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
+                    className="min-h-25 w-full resize-y rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
                   />
                 </div>
                 <button
@@ -245,19 +187,24 @@ export default function ContactSection() {
                     setSubmitted(true);
                   }}
                   disabled={submitted}
-                  className={`w-full justify-center rounded-(--nl-radius-sm) border-2 border-(--nl-green) px-6 py-4 text-[15.5px] font-semibold text-white transition-all ${
+                  className={`flex w-full items-center justify-center gap-2 rounded-brand-sm border-2 border-primary px-6 py-4 text-[15.5px] font-semibold text-primary-foreground transition-all ${
                     submitted
-                      ? "bg-(--nl-green-dark)"
-                      : "bg-(--nl-green) hover:-translate-y-0.5 hover:bg-(--nl-green-dark)"
+                      ? "bg-primary-dark"
+                      : "bg-primary hover:-translate-y-0.5 hover:bg-primary-dark"
                   }`}
                 >
-                  {submitted
-                    ? "✓ Message Sent! We'll respond within 24 hours."
-                    : "Send Message →"}
+                  {submitted ? (
+                    <>
+                      <Check className="size-4" aria-hidden="true" />
+                      Message Sent! We'll respond within 24 hours.
+                    </>
+                  ) : (
+                    "Send Message →"
+                  )}
                 </button>
-                <p className="text-center text-[12px] text-(--nl-text-muted)">
-                  🔒 Your data is safe with us. We never spam or share your
-                  information.
+                <p className="flex items-center justify-center gap-1.5 text-center text-[12px] text-text-muted">
+                  <Lock className="size-3" aria-hidden="true" />
+                  Your data is safe with us. We never spam or share your information.
                 </p>
               </form>
             </div>

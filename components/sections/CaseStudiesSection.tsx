@@ -1,14 +1,26 @@
 import Container from "@/components/Container";
 
-const cases = [
+type Metric = { value: string; label: string };
+
+type CaseStudy = {
+  tag: string;
+  title: string;
+  description: string;
+  imageLabel: string;
+  imageBg: string;
+  imageColor: string;
+  metrics: Metric[];
+};
+
+const cases: CaseStudy[] = [
   {
     tag: "SEO · Content Marketing",
     title: "D2C Fashion Brand: From Page 5 to Position #1",
     description:
       "A Bengaluru-based fashion D2C brand approached us with near-zero organic traffic. In 8 months, we rewrote their content architecture, built 200+ backlinks, and optimized 1,200+ pages.",
     imageLabel: "SEO + 148%",
-    imageBg: "bg-(--nl-green-light)",
-    imageColor: "text-(--nl-green)",
+    imageBg: "bg-accent",
+    imageColor: "text-primary",
     metrics: [
       { value: "148%", label: "Organic traffic growth" },
       { value: "#1", label: "Target keyword ranking" },
@@ -50,7 +62,7 @@ const cases = [
       "We designed and developed a cross-platform investment tracking app from scratch. Combined with an aggressive ASO and content marketing strategy, it hit 50K downloads in 6 months.",
     imageLabel: "App Built",
     imageBg: "bg-[#f0fdf4]",
-    imageColor: "text-(--nl-green)",
+    imageColor: "text-primary",
     metrics: [
       { value: "50K", label: "App downloads" },
       { value: "4.8★", label: "App Store rating" },
@@ -61,19 +73,12 @@ const cases = [
 
 export default function CaseStudiesSection() {
   return (
-    <section
-      className="bg-white py-24"
-      id="cases"
-      aria-labelledby="cases-heading"
-    >
+    <section className="bg-background py-24" id="cases" aria-labelledby="cases-heading">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-(--nl-green)">
-              <span
-                className="h-0.5 w-6 rounded bg-(--nl-green)"
-                aria-hidden="true"
-              />
+            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-primary">
+              <span className="h-0.5 w-6 rounded bg-primary" aria-hidden="true" />
               Proven Results
             </div>
             <h2
@@ -87,7 +92,7 @@ export default function CaseStudiesSection() {
           </div>
           <a
             href="#contact"
-            className="reveal delay-2 inline-flex items-center gap-2 rounded-(--nl-radius-sm) border border-(--nl-border-dark) px-6 py-3 text-[14px] font-semibold text-(--nl-text-primary) transition-all hover:-translate-y-0.5 hover:border-(--nl-green) hover:text-(--nl-green)"
+            className="reveal delay-2 inline-flex items-center gap-2 rounded-brand-sm border border-border-dark px-6 py-3 text-[14px] font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
           >
             View All Case Studies <span className="text-base">→</span>
           </a>
@@ -97,13 +102,11 @@ export default function CaseStudiesSection() {
           {cases.map((item, index) => (
             <article
               key={item.title}
-              className={`reveal ${index ? `delay-${(index % 2) + 1}` : ""} overflow-hidden rounded-(--nl-radius-lg) border border-(--nl-border) transition-all hover:-translate-y-1 hover:border-(--nl-green) hover:shadow-(--nl-shadow-md)`}
+              className={`reveal ${index ? `delay-${(index % 2) + 1}` : ""} overflow-hidden rounded-brand-lg border border-border transition-all hover:-translate-y-1 hover:border-primary hover:shadow-brand-md`}
               itemScope
               itemType="https://schema.org/Article"
             >
-              <div
-                className={`aspect-4/3 ${item.imageBg} flex items-center justify-center`}
-              >
+              <div className={`aspect-4/3 ${item.imageBg} flex items-center justify-center`}>
                 <span
                   className={`font-display text-[20px] font-black tracking-[-1px] ${item.imageColor}`}
                 >
@@ -112,7 +115,7 @@ export default function CaseStudiesSection() {
               </div>
               <div className="p-6 sm:p-7">
                 <span
-                  className="inline-block rounded bg-(--nl-green-light) px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.06em] text-(--nl-green)"
+                  className="inline-block rounded bg-accent px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.06em] text-primary"
                   itemProp="keywords"
                 >
                   {item.tag}
@@ -124,7 +127,7 @@ export default function CaseStudiesSection() {
                   {item.title}
                 </h4>
                 <p
-                  className="mt-2 text-[14px] leading-[1.7] text-(--nl-text-secondary)"
+                  className="mt-2 text-[14px] leading-[1.7] text-muted-foreground"
                   itemProp="description"
                 >
                   {item.description}
@@ -132,12 +135,10 @@ export default function CaseStudiesSection() {
                 <div className="mt-5 flex flex-wrap gap-6">
                   {item.metrics.map((metric) => (
                     <div key={metric.label}>
-                      <div className="font-display text-[24px] font-extrabold text-(--nl-green) tracking-[-0.8px]">
+                      <div className="font-display text-[24px] font-extrabold tracking-[-0.8px] text-primary">
                         {metric.value}
                       </div>
-                      <div className="text-[11.5px] text-(--nl-text-muted)">
-                        {metric.label}
-                      </div>
+                      <div className="text-[11.5px] text-text-muted">{metric.label}</div>
                     </div>
                   ))}
                 </div>

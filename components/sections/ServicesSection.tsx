@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   BarChart3,
@@ -8,6 +8,7 @@ import {
   Globe,
   LineChart,
   Megaphone,
+  Monitor,
   PenLine,
   Search,
   ShieldCheck,
@@ -15,122 +16,124 @@ import {
   Target,
   Users2,
   Wrench,
-} from "lucide-react";
-import { useState } from "react";
-import Container from "@/components/Container";
+} from 'lucide-react'
+import { useState } from 'react'
+import Container from '@/components/Container'
 
 const techCards = [
   {
-    title: "Custom Software Development",
+    title: 'Custom Software Development',
     description:
-      "Bespoke web applications, enterprise platforms, and SaaS products tailored to your exact workflow and business model.",
+      'Bespoke web applications, enterprise platforms, and SaaS products tailored to your exact workflow and business model.',
     icon: Code2,
   },
   {
-    title: "Mobile App Development",
+    title: 'Mobile App Development',
     description:
-      "Native and cross-platform iOS & Android apps with sleek UX, high performance, and seamless backend integration.",
+      'Native and cross-platform iOS & Android apps with sleek UX, high performance, and seamless backend integration.',
     icon: Smartphone,
   },
   {
-    title: "AI & Machine Learning",
+    title: 'AI & Machine Learning',
     description:
-      "Generative AI integrations, ML pipelines, NLP solutions, and intelligent automation that make your product smarter.",
+      'Generative AI integrations, ML pipelines, NLP solutions, and intelligent automation that make your product smarter.',
     icon: Brain,
   },
   {
-    title: "Cloud & DevOps",
+    title: 'Cloud & DevOps',
     description:
-      "AWS, GCP, Azure infrastructure design, containerization with Docker/Kubernetes, and automated CI/CD pipelines.",
+      'AWS, GCP, Azure infrastructure design, containerization with Docker/Kubernetes, and automated CI/CD pipelines.',
     icon: Cloud,
   },
   {
-    title: "Data Analytics & BI",
+    title: 'Data Analytics & BI',
     description:
-      "Custom dashboards, data pipelines, and business intelligence tools that convert raw data into actionable insights.",
+      'Custom dashboards, data pipelines, and business intelligence tools that convert raw data into actionable insights.',
     icon: LineChart,
   },
   {
-    title: "Web Development & Design",
+    title: 'Web Development & Design',
     description:
-      "High-performance websites, e-commerce platforms, and landing pages designed for conversions and SEO from day one.",
+      'High-performance websites, e-commerce platforms, and landing pages designed for conversions and SEO from day one.',
     icon: Globe,
   },
   {
-    title: "Cybersecurity Solutions",
+    title: 'Cybersecurity Solutions',
     description:
-      "Security audits, penetration testing, compliance frameworks (GDPR, ISO 27001), and ongoing threat monitoring.",
+      'Security audits, penetration testing, compliance frameworks (GDPR, ISO 27001), and ongoing threat monitoring.',
     icon: ShieldCheck,
   },
   {
-    title: "IT Consulting & Strategy",
+    title: 'IT Consulting & Strategy',
     description:
-      "Technology roadmapping, digital transformation advisory, and architecture reviews for startups to enterprises.",
+      'Technology roadmapping, digital transformation advisory, and architecture reviews for startups to enterprises.',
     icon: Wrench,
   },
-];
+]
 
 const marketingCards = [
   {
-    title: "Search Engine Optimization",
+    title: 'Search Engine Optimization',
     description:
-      "Technical SEO, on-page optimization, link building, and content strategies that dominate Google rankings and drive organic traffic.",
+      'Technical SEO, on-page optimization, link building, and content strategies that dominate Google rankings and drive organic traffic.',
     icon: Search,
   },
   {
-    title: "PPC & Paid Advertising",
+    title: 'PPC & Paid Advertising',
     description:
-      "Google Ads, Meta Ads, LinkedIn campaigns with laser-targeted audience segmentation and continuous optimization for max ROAS.",
+      'Google Ads, Meta Ads, LinkedIn campaigns with laser-targeted audience segmentation and continuous optimization for max ROAS.',
     icon: Target,
   },
   {
-    title: "Content Marketing",
+    title: 'Content Marketing',
     description:
-      "SEO-driven blogs, whitepapers, case studies, and video scripts that establish thought leadership and build organic authority.",
+      'SEO-driven blogs, whitepapers, case studies, and video scripts that establish thought leadership and build organic authority.',
     icon: PenLine,
   },
   {
-    title: "Social Media Marketing",
+    title: 'Social Media Marketing',
     description:
-      "Platform-specific content strategy, community management, and influencer partnerships across LinkedIn, Instagram, Twitter & more.",
+      'Platform-specific content strategy, community management, and influencer partnerships across LinkedIn, Instagram, Twitter & more.',
     icon: Users2,
   },
   {
-    title: "Brand Strategy & Identity",
+    title: 'Brand Strategy & Identity',
     description:
-      "Brand positioning, visual identity design, tone of voice, and messaging frameworks that make you unforgettable in your market.",
+      'Brand positioning, visual identity design, tone of voice, and messaging frameworks that make you unforgettable in your market.',
     icon: Megaphone,
   },
   {
-    title: "Email Marketing & CRM",
+    title: 'Email Marketing & CRM',
     description:
-      "Automated drip campaigns, segmentation, A/B testing, and lifecycle marketing that nurtures leads into paying customers.",
+      'Automated drip campaigns, segmentation, A/B testing, and lifecycle marketing that nurtures leads into paying customers.',
     icon: BarChart3,
   },
   {
-    title: "Market Research & Intelligence",
+    title: 'Market Research & Intelligence',
     description:
-      "Competitive analysis, consumer insights, international market entry research, and data-backed growth opportunity mapping.",
+      'Competitive analysis, consumer insights, international market entry research, and data-backed growth opportunity mapping.',
     icon: LineChart,
   },
   {
-    title: "Digital Analytics & Reporting",
+    title: 'Digital Analytics & Reporting',
     description:
-      "GA4 setup, custom dashboard builds, attribution modeling, and monthly performance reports tied to revenue metrics.",
+      'GA4 setup, custom dashboard builds, attribution modeling, and monthly performance reports tied to revenue metrics.',
     icon: BarChart3,
   },
-];
+]
+
+type ServiceCard = { title: string; description: string; icon: React.ComponentType<{ className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }> }
 
 type ServicesPanelProps = {
-  id: string;
-  labelledBy: string;
-  title: string;
-  description: string;
-  chips: string[];
-  cards: typeof techCards;
-  active: boolean;
-  headingId: string;
-};
+  id: string
+  labelledBy: string
+  title: string
+  description: string
+  chips: string[]
+  cards: ServiceCard[]
+  active: boolean
+  headingId: string
+}
 
 function ServicesPanel({
   id,
@@ -147,7 +150,7 @@ function ServicesPanel({
       id={id}
       role="tabpanel"
       aria-labelledby={labelledBy}
-      className={`mt-14 ${active ? "block" : "hidden"}`}
+      className={`mt-14 ${active ? 'block' : 'hidden'}`}
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:gap-12">
         <div>
@@ -157,15 +160,15 @@ function ServicesPanel({
           >
             {title}
           </h3>
-          <p className="reveal delay-1 mt-3 max-w-105 text-[15px] text-(--nl-text-secondary)">
+          <p className="reveal mt-3 max-w-105 text-[15px] text-muted-foreground delay-1">
             {description}
           </p>
         </div>
-        <div className="reveal delay-2 flex flex-col gap-3 lg:items-start">
+        <div className="reveal flex flex-col gap-3 delay-2 lg:items-start">
           {chips.map((chip) => (
             <span
               key={chip}
-              className="inline-flex w-fit items-center gap-1 rounded-full border border-(--nl-green-mid) bg-(--nl-green-light) px-3 py-1 text-[12.5px] font-semibold text-(--nl-green-dark)"
+              className="inline-flex w-fit items-center gap-1 rounded-full border border-primary-mid bg-accent px-3 py-1 text-[12.5px] font-semibold text-primary-dark"
             >
               {chip}
             </span>
@@ -175,61 +178,51 @@ function ServicesPanel({
 
       <div className="mt-14 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {cards.map((card, index) => {
-          const Icon = card.icon;
+          const Icon = card.icon
           return (
             <article
               key={card.title}
-              className={`reveal ${index ? `delay-${(index % 4) + 1}` : ""} relative overflow-hidden rounded-(--nl-radius-md) border border-(--nl-border) bg-white p-6 transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0.75 before:origin-left before:scale-x-0 before:bg-(--nl-green) before:transition-transform hover:-translate-y-1 hover:border-(--nl-green) hover:shadow-(--nl-shadow-md) hover:before:scale-x-100 sm:p-7`}
+              className={`reveal ${index ? `delay-${(index % 4) + 1}` : ''} relative overflow-hidden rounded-brand-md border border-border bg-white p-6 transition-all before:absolute before:top-0 before:right-0 before:left-0 before:h-0.75 before:origin-left before:scale-x-0 before:bg-primary before:transition-transform hover:-translate-y-1 hover:border-primary hover:shadow-brand-md hover:before:scale-x-100 sm:p-7`}
               itemScope
               itemType="https://schema.org/Service"
             >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-[12px] bg-(--nl-green-light) text-(--nl-text-primary) transition-colors">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-[12px] bg-accent text-foreground transition-colors">
                 <Icon className="h-6 w-6" aria-hidden="true" />
               </div>
-              <h4
-                className="font-display text-[16px] font-bold tracking-[-0.3px]"
-                itemProp="name"
-              >
+              <h4 className="font-display text-[16px] font-bold tracking-[-0.3px]" itemProp="name">
                 {card.title}
               </h4>
               <p
-                className="mt-2 text-[13.5px] leading-[1.7] text-(--nl-text-secondary)"
+                className="mt-2 text-[13.5px] leading-[1.7] text-muted-foreground"
                 itemProp="description"
               >
                 {card.description}
               </p>
               <a
                 href="#contact"
-                className="mt-4 inline-flex items-center gap-2 text-[13px] font-semibold text-(--nl-green)"
+                className="mt-4 inline-flex items-center gap-2 text-[13px] font-semibold text-primary"
                 itemProp="url"
               >
                 Learn more <span className="text-base">→</span>
               </a>
             </article>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }
 
 export default function ServicesSection() {
-  const [activeTab, setActiveTab] = useState<"tech" | "mkt">("tech");
+  const [activeTab, setActiveTab] = useState<'tech' | 'mkt'>('tech')
 
   return (
-    <section
-      className="bg-white py-24"
-      id="services"
-      aria-labelledby="services-heading"
-    >
+    <section className="bg-white py-24" id="services" aria-labelledby="services-heading">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-(--nl-green)">
-              <span
-                className="h-0.5 w-6 rounded bg-(--nl-green)"
-                aria-hidden="true"
-              />
+            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-primary">
+              <span className="h-0.5 w-6 rounded bg-primary" aria-hidden="true" />
               Our Expertise
             </div>
             <h2
@@ -241,45 +234,47 @@ export default function ServicesSection() {
               One Roof.
             </h2>
           </div>
-          <p className="reveal delay-2 max-w-100 text-[18px] font-light leading-[1.75] text-(--nl-text-secondary)">
-            Whether you need cutting-edge technology built or your market
-            presence amplified — we do both, and we connect them.
+          <p className="reveal delay-2 max-w-100 text-[18px] font-light leading-[1.75] text-muted-foreground">
+            Whether you need cutting-edge technology built or your market presence amplified — we do
+            both, and we connect them.
           </p>
         </div>
 
         <div
-          className="mt-10 flex flex-nowrap gap-2 overflow-x-auto border-b-2 border-(--nl-border) pb-2 md:mt-14 md:flex-wrap md:overflow-visible md:pb-0"
+          className="mt-10 flex flex-nowrap gap-2 overflow-x-auto border-b-2 border-border pb-2 md:mt-14 md:flex-wrap md:overflow-visible md:pb-0"
           role="tablist"
         >
           <button
             type="button"
             role="tab"
             id="tab-tech"
-            aria-selected={activeTab === "tech"}
+            aria-selected={activeTab === 'tech'}
             aria-controls="panel-tech"
             className={`border-b-[3px] px-4 py-3 text-[14px] font-semibold transition-colors sm:px-6 sm:text-[15px] ${
-              activeTab === "tech"
-                ? "border-(--nl-green) text-(--nl-green)"
-                : "border-transparent text-(--nl-text-muted) hover:text-(--nl-text-primary)"
+              activeTab === 'tech'
+                ? 'border-primary text-primary'
+                : 'border-transparent text-text-muted hover:text-foreground'
             }`}
-            onClick={() => setActiveTab("tech")}
+            onClick={() => setActiveTab('tech')}
           >
-            <span className="mr-2">💻</span> Technology Services
+            <Monitor className="mr-2 inline-block size-4 align-middle" aria-hidden="true" />
+            Technology Services
           </button>
           <button
             type="button"
             role="tab"
             id="tab-mkt"
-            aria-selected={activeTab === "mkt"}
+            aria-selected={activeTab === 'mkt'}
             aria-controls="panel-mkt"
             className={`border-b-[3px] px-4 py-3 text-[14px] font-semibold transition-colors sm:px-6 sm:text-[15px] ${
-              activeTab === "mkt"
-                ? "border-(--nl-green) text-(--nl-green)"
-                : "border-transparent text-(--nl-text-muted) hover:text-(--nl-text-primary)"
+              activeTab === 'mkt'
+                ? 'border-primary text-primary'
+                : 'border-transparent text-text-muted hover:text-foreground'
             }`}
-            onClick={() => setActiveTab("mkt")}
+            onClick={() => setActiveTab('mkt')}
           >
-            <span className="mr-2">📣</span> Marketing Services
+            <Megaphone className="mr-2 inline-block size-4 align-middle" aria-hidden="true" />
+            Marketing Services
           </button>
         </div>
 
@@ -288,13 +283,9 @@ export default function ServicesSection() {
           labelledBy="tab-tech"
           title="Technology Services"
           description="From concept to deployment — we architect, build, and scale digital products that solve real business problems and create competitive advantages."
-          chips={[
-            "✓ Agile delivery",
-            "✓ 99.9% SLA uptime",
-            "✓ Enterprise-grade security",
-          ]}
+          chips={['✓ Agile delivery', '✓ 99.9% SLA uptime', '✓ Enterprise-grade security']}
           cards={techCards}
-          active={activeTab === "tech"}
+          active={activeTab === 'tech'}
           headingId="tech-services"
         />
         <ServicesPanel
@@ -303,15 +294,15 @@ export default function ServicesSection() {
           title="Marketing Services"
           description="Data-driven, full-funnel marketing strategies that build brand authority, generate qualified leads, and convert them into loyal customers."
           chips={[
-            "✓ SEO-first approach",
-            "✓ Analytics & attribution",
-            "✓ ROI-guaranteed framework",
+            '✓ SEO-first approach',
+            '✓ Analytics & attribution',
+            '✓ ROI-guaranteed framework',
           ]}
           cards={marketingCards}
-          active={activeTab === "mkt"}
+          active={activeTab === 'mkt'}
           headingId="mkt-services"
         />
       </Container>
     </section>
-  );
+  )
 }

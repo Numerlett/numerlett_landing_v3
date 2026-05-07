@@ -1,14 +1,24 @@
+import { BarChart3, Bot, Megaphone, type LucideIcon } from "lucide-react";
 import Container from "@/components/Container";
 
-const posts = [
+type Post = {
+  tag: string;
+  title: string;
+  description: string;
+  date: string;
+  Icon: LucideIcon;
+  bg: string;
+};
+
+const posts: Post[] = [
   {
     tag: "SEO Strategy",
     title: "How to Rank #1 on Google in 2025: The Complete Technical SEO Guide",
     description:
       "Core Web Vitals, E-E-A-T signals, schema markup, and the 12-step audit checklist that gets our clients to position one.",
     date: "April 2025",
-    icon: "📊",
-    bg: "bg-(--nl-green-light)",
+    Icon: BarChart3,
+    bg: "bg-accent",
   },
   {
     tag: "AI & Software",
@@ -17,7 +27,7 @@ const posts = [
     description:
       "A deep dive into the demand forecasting models behind SEED, and how AI reduces overstock and stockout losses for manufacturers.",
     date: "March 2025",
-    icon: "🤖",
+    Icon: Bot,
     bg: "bg-[#fff8e8]",
   },
   {
@@ -27,7 +37,7 @@ const posts = [
     description:
       "The exact channel mix, budget allocation model, and content calendar framework we use for D2C brands entering the Indian market.",
     date: "March 2025",
-    icon: "📣",
+    Icon: Megaphone,
     bg: "bg-[#f0f4ff]",
   },
 ];
@@ -35,18 +45,15 @@ const posts = [
 export default function BlogSection() {
   return (
     <section
-      className="bg-(--nl-grey-light) py-24"
+      className="bg-muted py-24"
       id="blog"
       aria-labelledby="blog-heading"
     >
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-(--nl-green)">
-              <span
-                className="h-0.5 w-6 rounded bg-(--nl-green)"
-                aria-hidden="true"
-              />
+            <div className="reveal inline-flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-primary">
+              <span className="h-0.5 w-6 rounded bg-primary" aria-hidden="true" />
               Insights & Thought Leadership
             </div>
             <h2
@@ -60,7 +67,7 @@ export default function BlogSection() {
           </div>
           <a
             href="#"
-            className="reveal delay-2 inline-flex items-center gap-2 rounded-(--nl-radius-sm) border border-(--nl-border-dark) px-6 py-3 text-[14px] font-semibold text-(--nl-text-primary) transition-all hover:-translate-y-0.5 hover:border-(--nl-green) hover:text-(--nl-green)"
+            className="reveal delay-2 inline-flex items-center gap-2 rounded-brand-sm border border-border-dark px-6 py-3 text-[14px] font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
           >
             View All Articles <span className="text-base">→</span>
           </a>
@@ -70,18 +77,18 @@ export default function BlogSection() {
           {posts.map((post, index) => (
             <article
               key={post.title}
-              className={`reveal ${index ? `delay-${index + 1}` : ""} overflow-hidden rounded-(--nl-radius-md) border border-(--nl-border) bg-white transition-all hover:-translate-y-1 hover:border-(--nl-green) hover:shadow-(--nl-shadow-md)`}
+              className={`reveal ${index ? `delay-${index + 1}` : ""} overflow-hidden rounded-brand-md border border-border bg-background transition-all hover:-translate-y-1 hover:border-primary hover:shadow-brand-md`}
               itemScope
               itemType="https://schema.org/BlogPosting"
             >
               <div
-                className={`aspect-4/3 ${post.bg} flex items-center justify-center text-[40px]`}
+                className={`aspect-4/3 ${post.bg} flex items-center justify-center`}
               >
-                {post.icon}
+                <post.Icon className="size-10 text-primary" aria-hidden="true" />
               </div>
               <div className="p-6">
                 <span
-                  className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-(--nl-green)"
+                  className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-primary"
                   itemProp="keywords"
                 >
                   {post.tag}
@@ -93,22 +100,19 @@ export default function BlogSection() {
                   {post.title}
                 </h4>
                 <p
-                  className="mt-2 text-[13.5px] leading-[1.7] text-(--nl-text-secondary)"
+                  className="mt-2 text-[13.5px] leading-[1.7] text-muted-foreground"
                   itemProp="description"
                 >
                   {post.description}
                 </p>
                 <div className="mt-4 flex items-center justify-between">
                   <span
-                    className="font-mono text-[11.5px] text-(--nl-text-muted)"
+                    className="font-mono text-[11.5px] text-text-muted"
                     itemProp="datePublished"
                   >
                     {post.date}
                   </span>
-                  <a
-                    href="#"
-                    className="text-[12.5px] font-semibold text-(--nl-green)"
-                  >
+                  <a href="#" className="text-[12.5px] font-semibold text-primary">
                     Read →
                   </a>
                 </div>

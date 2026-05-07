@@ -1,10 +1,12 @@
+import { Rocket } from "lucide-react";
+
 export default function AnnouncementBar() {
   return (
     <div
-      className="bg-(--nl-green) px-4 py-2 text-center text-[12px] font-medium leading-snug text-white sm:px-6 sm:text-[13px]"
+      className="bg-primary px-4 py-2 text-center text-[12px] font-medium leading-snug text-primary-foreground sm:px-6 sm:text-[13px]"
       role="banner"
     >
-      <span aria-hidden="true">🚀</span>
+      <Rocket className="inline-block size-3.5 align-middle" aria-hidden="true" />
       <span className="ml-2">
         SEED - Our AI-powered Inventory Management System is now live.
       </span>
