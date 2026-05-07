@@ -1,6 +1,7 @@
 import { Leaf } from 'lucide-react'
 import { FaGithub, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 import Container from '@/components/Container'
+import Logo from '@/components/Logo'
 
 const techLinks = [
   'Custom Software Development',
@@ -42,10 +43,7 @@ export default function SiteFooter() {
       <Container>
         <div className="grid gap-12 py-18 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>
-            <div className="font-display text-[24px] font-extrabold tracking-[-1px]">
-              Numer<span className="text-primary">Lett</span>
-              <span className="text-primary">.</span>
-            </div>
+            <Logo theme="dark" className="text-2xl" />
             <p className="mt-4 max-w-70 text-[14px] font-light leading-[1.7] text-text-muted">
               Where Technology meets Marketing, and Software creates competitive advantage. Building
               India's best businesses, one solution at a time.
