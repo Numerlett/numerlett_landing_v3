@@ -10,7 +10,7 @@ import { useState, useTransition } from "react";
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/contact";
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/admin";
 
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");

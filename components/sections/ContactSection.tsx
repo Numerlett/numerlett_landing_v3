@@ -1,11 +1,46 @@
 "use client";
 
-import { Check, Clock, Lock, Mail, MapPin, Phone } from "lucide-react";
-import { useState } from "react";
+import { createContactForm } from "@/actions/contactForm";
 import Container from "@/components/Container";
+import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, Clock, Lock, Mail, MapPin, Phone } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const schema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Enter a valid email address"),
+  mobile: z.string().min(7, "Enter a valid phone number"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+const contactDetails = [
+  { Icon: Mail, label: "Email", content: <a href="mailto:hello@numerlett.com" className="text-primary">hello@numerlett.com</a> },
+  { Icon: Phone, label: "Phone", content: <a href="tel:+918000000000" className="text-primary">+91 80000 00000</a> },
+  { Icon: MapPin, label: "Location", content: "Bengaluru, Karnataka, India" },
+  { Icon: Clock, label: "Response Time", content: "Within 24 hours · Mon–Sat" },
+];
 
 export default function ContactSection() {
-  const [submitted, setSubmitted] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    setError,
+  } = useForm<FormValues>({ resolver: zodResolver(schema) });
+
+  async function onSubmit(values: FormValues) {
+    const result = await createContactForm(values);
+    if (!result.success) {
+      setError("root", { message: result.error ?? "Something went wrong. Please try again." });
+    }
+  }
 
   return (
     <section className="bg-background py-24" id="contact" aria-labelledby="contact-heading">
@@ -30,12 +65,7 @@ export default function ContactSection() {
             </p>
 
             <div className="reveal delay-2 mt-8 space-y-6">
-              {[
-                { Icon: Mail, label: "Email", content: <a href="mailto:hello@numerlett.com" className="text-primary">hello@numerlett.com</a> },
-                { Icon: Phone, label: "Phone", content: <a href="tel:+918000000000" className="text-primary">+91 80000 00000</a> },
-                { Icon: MapPin, label: "Location", content: "Bengaluru, Karnataka, India" },
-                { Icon: Clock, label: "Response Time", content: "Within 24 hours · Mon–Sat" },
-              ].map(({ Icon, label, content }) => (
+              {contactDetails.map(({ Icon, label, content }) => (
                 <div key={label} className="flex gap-4">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-primary-mid bg-accent">
                     <Icon className="size-5 text-primary" aria-hidden="true" />
@@ -54,159 +84,88 @@ export default function ContactSection() {
               <h3 className="font-display text-[22px] font-bold tracking-[-0.5px]">
                 Send Us a Message
               </h3>
-              <form className="mt-6 space-y-5">
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <label
-                      htmlFor="fname"
-                      className="mb-2 block text-[13px] font-semibold text-muted-foreground"
-                    >
-                      First Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="fname"
-                      name="first_name"
-                      placeholder="Rahul"
-                      required
-                      autoComplete="given-name"
-                      className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
-                    />
+
+              {isSubmitSuccessful ? (
+                <div className="mt-8 flex flex-col items-center gap-3 py-8 text-center">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary">
+                    <Check className="size-7 text-primary-foreground" aria-hidden="true" />
                   </div>
-                  <div>
-                    <label
-                      htmlFor="lname"
-                      className="mb-2 block text-[13px] font-semibold text-muted-foreground"
-                    >
-                      Last Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="lname"
-                      name="last_name"
-                      placeholder="Sharma"
-                      required
-                      autoComplete="family-name"
-                      className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
+                  <p className="text-[17px] font-semibold">Message Sent!</p>
+                  <p className="text-[14px] text-muted-foreground">
+                    We'll get back to you within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit(onSubmit)} noValidate className="mt-6 space-y-5">
+                  <Field data-invalid={!!errors.name}>
+                    <FieldLabel htmlFor="name">Full Name *</FieldLabel>
+                    <Input
+                      id="name"
+                      placeholder="Rahul Sharma"
+                      autoComplete="name"
+                      aria-invalid={!!errors.name}
+                      {...register("name")}
                     />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-2 block text-[13px] font-semibold text-muted-foreground"
-                  >
-                    Business Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="rahul@company.com"
-                    required
-                    autoComplete="email"
-                    className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="mb-2 block text-[13px] font-semibold text-muted-foreground"
-                  >
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="+91 98765 43210"
-                    autoComplete="tel"
-                    className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="service"
-                    className="mb-2 block text-[13px] font-semibold text-muted-foreground"
-                  >
-                    Service Interested In *
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    required
-                    defaultValue=""
-                    className="w-full rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
-                  >
-                    <option value="" disabled>
-                      Select a service…
-                    </option>
-                    <optgroup label="Technology Services">
-                      <option>Custom Software Development</option>
-                      <option>Mobile App Development</option>
-                      <option>AI & Machine Learning</option>
-                      <option>Cloud & DevOps</option>
-                      <option>Data Analytics & BI</option>
-                      <option>Web Development</option>
-                      <option>Cybersecurity</option>
-                      <option>IT Consulting</option>
-                    </optgroup>
-                    <optgroup label="Marketing Services">
-                      <option>SEO / Organic Search</option>
-                      <option>PPC & Paid Advertising</option>
-                      <option>Content Marketing</option>
-                      <option>Social Media Marketing</option>
-                      <option>Brand Strategy</option>
-                      <option>Email Marketing</option>
-                      <option>Market Research</option>
-                    </optgroup>
-                    <optgroup label="Products">
-                      <option>SEED — Inventory Management System</option>
-                    </optgroup>
-                    <option>Full Package (Tech + Marketing)</option>
-                  </select>
-                </div>
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-2 block text-[13px] font-semibold text-muted-foreground"
-                  >
-                    Tell Us About Your Project
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Brief description of your project, goals, timeline, and any specific requirements…"
-                    className="min-h-25 w-full resize-y rounded-brand-sm border border-border bg-background px-4 py-3 text-[14px] text-foreground outline-none transition focus:border-primary focus:shadow-[0_0_0_3px_rgba(51,175,145,0.12)]"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    setSubmitted(true);
-                  }}
-                  disabled={submitted}
-                  className={`flex w-full items-center justify-center gap-2 rounded-brand-sm border-2 border-primary px-6 py-4 text-[15.5px] font-semibold text-primary-foreground transition-all ${
-                    submitted
-                      ? "bg-primary-dark"
-                      : "bg-primary hover:-translate-y-0.5 hover:bg-primary-dark"
-                  }`}
-                >
-                  {submitted ? (
-                    <>
-                      <Check className="size-4" aria-hidden="true" />
-                      Message Sent! We'll respond within 24 hours.
-                    </>
-                  ) : (
-                    "Send Message →"
+                    <FieldError errors={[errors.name]} />
+                  </Field>
+
+                  <Field data-invalid={!!errors.email}>
+                    <FieldLabel htmlFor="email">Business Email *</FieldLabel>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="rahul@company.com"
+                      autoComplete="email"
+                      aria-invalid={!!errors.email}
+                      {...register("email")}
+                    />
+                    <FieldError errors={[errors.email]} />
+                  </Field>
+
+                  <Field data-invalid={!!errors.mobile}>
+                    <FieldLabel htmlFor="mobile">Phone Number *</FieldLabel>
+                    <Input
+                      id="mobile"
+                      type="tel"
+                      placeholder="+91 98765 43210"
+                      autoComplete="tel"
+                      aria-invalid={!!errors.mobile}
+                      {...register("mobile")}
+                    />
+                    <FieldError errors={[errors.mobile]} />
+                  </Field>
+
+                  <Field data-invalid={!!errors.message}>
+                    <FieldLabel htmlFor="message">Tell Us About Your Project *</FieldLabel>
+                    <Textarea
+                      id="message"
+                      placeholder="Brief description of your project, goals, timeline, and any specific requirements…"
+                      aria-invalid={!!errors.message}
+                      {...register("message")}
+                    />
+                    <FieldError errors={[errors.message]} />
+                  </Field>
+
+                  {errors.root && (
+                    <p role="alert" className="text-sm text-destructive">
+                      {errors.root.message}
+                    </p>
                   )}
-                </button>
-                <p className="flex items-center justify-center gap-1.5 text-center text-[12px] text-text-muted">
-                  <Lock className="size-3" aria-hidden="true" />
-                  Your data is safe with us. We never spam or share your information.
-                </p>
-              </form>
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-6 text-[15.5px] font-semibold"
+                  >
+                    {isSubmitting ? "Sending…" : "Send Message →"}
+                  </Button>
+
+                  <p className="flex items-center justify-center gap-1.5 text-center text-[12px] text-muted-foreground">
+                    <Lock className="size-3" aria-hidden="true" />
+                    Your data is safe with us. We never spam or share your information.
+                  </p>
+                </form>
+              )}
             </div>
           </div>
         </div>
