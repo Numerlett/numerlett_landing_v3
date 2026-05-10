@@ -84,3 +84,30 @@ export async function deleteFaq(id: string) {
     return { success: false, error: "Failed to delete FAQ" };
   }
 }
+
+export async function reorderFaqs(items: { id: string; order: number }[]) {
+  try {
+    await connectDB();
+    await Promise.all(
+      items.map(({ id, order }) => FaqModel.findByIdAndUpdate(id, { order })),
+    );
+    revalidatePath("/", "layout");
+    return { success: true };
+  } catch {
+    return { success: false, error: "Failed to reorder FAQs" };
+  }
+}
+
+export async function getFaqStats() {
+  try {
+    await connectDB();
+    const [total, published, draft] = await Promise.all([
+      FaqModel.countDocuments(),
+      FaqModel.countDocuments({ status: FaqStatus.PUBLISHED }),
+      FaqModel.countDocuments({ status: FaqStatus.DRAFT }),
+    ]);
+    return { success: true, data: { total, published, draft } };
+  } catch {
+    return { success: false, error: "Failed to fetch FAQ stats" };
+  }
+}

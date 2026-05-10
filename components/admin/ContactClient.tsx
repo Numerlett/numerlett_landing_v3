@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -10,6 +10,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -78,6 +84,7 @@ export default function ContactClient({
 }) {
   const [forms, setForms] = useState<ContactForm[]>(initialForms);
   const [selected, setSelected] = useState<ContactForm | null>(null);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [adminNotes, setAdminNotes] = useState("");
   const [activeTab, setActiveTab] = useState("all");
 
@@ -130,16 +137,20 @@ export default function ContactClient({
     const result = await deleteContactForm(id);
     if (result.success) {
       setForms((prev) => prev.filter((f) => f.id !== id));
-      if (selected?.id === id) setSelected(null);
+      if (selected?.id === id) {
+        setSelected(null);
+        setSheetOpen(false);
+      }
       toast.success("Submission deleted");
     } else {
       toast.error(result.error ?? "Failed to delete");
     }
   };
 
-  const selectForm = (form: ContactForm) => {
+  const openSheet = (form: ContactForm) => {
     setSelected(form);
     setAdminNotes(form.adminNotes ?? "");
+    setSheetOpen(true);
   };
 
   return (
@@ -180,173 +191,151 @@ export default function ContactClient({
               </CardContent>
             </Card>
           ) : (
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              {/* List */}
-              <div className="space-y-3">
-                {filtered.map((form) => (
-                  <Card
-                    key={form.id}
-                    className={cn(
-                      "cursor-pointer transition-all",
-                      selected?.id === form.id
-                        ? "ring-primary ring-2"
-                        : "hover:shadow-brand-md",
-                    )}
-                    onClick={() => selectForm(form)}
-                  >
-                    <CardContent className="p-4">
-                      <div className="mb-2 flex items-start justify-between">
-                        <div className="flex-1">
-                          <p className="font-semibold">{form.name}</p>
-                          <div className="text-muted-foreground mt-1 flex items-center gap-1.5 text-sm">
-                            <MailIcon className="size-3" aria-hidden="true" />
-                            {form.email}
-                          </div>
-                          <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
-                            <PhoneIcon className="size-3" aria-hidden="true" />
-                            {form.mobile}
-                          </div>
+            <div className="space-y-3">
+              {filtered.map((form) => (
+                <Card
+                  key={form.id}
+                  className={cn(
+                    "cursor-pointer transition-all hover:shadow-brand-md",
+                    selected?.id === form.id && sheetOpen && "ring-primary ring-2",
+                  )}
+                  onClick={() => openSheet(form)}
+                >
+                  <CardContent className="p-4">
+                    <div className="mb-2 flex items-start justify-between">
+                      <div className="flex-1">
+                        <p className="font-semibold">{form.name}</p>
+                        <div className="text-muted-foreground mt-1 flex items-center gap-1.5 text-sm">
+                          <MailIcon className="size-3" aria-hidden="true" />
+                          {form.email}
                         </div>
-                        <span
-                          className={cn(
-                            "rounded-full px-2 py-0.5 text-xs font-medium",
-                            statusConfig[form.status].className,
-                          )}
-                        >
-                          {statusConfig[form.status].label}
-                        </span>
-                      </div>
-                      <p className="text-muted-foreground mb-2 line-clamp-2 text-sm">
-                        {form.message}
-                      </p>
-                      <div className="text-muted-foreground flex items-center gap-1.5 text-xs">
-                        <CalendarIcon className="size-3" aria-hidden="true" />
-                        {formatDate(form.createdAt)}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Detail */}
-              <div className="lg:sticky lg:top-6 lg:h-fit">
-                {selected ? (
-                  <Card>
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <CardTitle>Details</CardTitle>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleDelete(selected.id)}
-                          aria-label="Delete submission"
-                        >
-                          <TrashIcon
-                            className="text-destructive size-4"
-                            aria-hidden="true"
-                          />
-                        </Button>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <Field label="Name">{selected.name}</Field>
-
-                      <Field label="Email">
-                        <a
-                          href={`mailto:${selected.email}`}
-                          className="text-primary hover:underline"
-                        >
-                          {selected.email}
-                        </a>
-                      </Field>
-
-                      <Field label="Mobile">
-                        <a
-                          href={`tel:${selected.mobile}`}
-                          className="text-primary hover:underline"
-                        >
-                          {selected.mobile}
-                        </a>
-                      </Field>
-
-                      <Field label="Message">
-                        <div className="bg-muted rounded-md p-3 text-sm whitespace-pre-wrap">
-                          {selected.message}
-                        </div>
-                      </Field>
-
-                      <Field label="Status">
-                        <Select
-                          value={selected.status}
-                          onValueChange={(val) =>
-                            handleStatusChange(
-                              selected.id,
-                              val as ContactFormStatus,
-                            )
-                          }
-                        >
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="PENDING">Pending</SelectItem>
-                            <SelectItem value="IN_PROGRESS">
-                              In Progress
-                            </SelectItem>
-                            <SelectItem value="RESOLVED">Resolved</SelectItem>
-                            <SelectItem value="CLOSED">Closed</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </Field>
-
-                      <Field label="Admin Notes">
-                        <Textarea
-                          value={adminNotes}
-                          onChange={(e) => setAdminNotes(e.target.value)}
-                          rows={4}
-                          placeholder="Add internal notes…"
-                        />
-                        <Button
-                          size="sm"
-                          className="mt-2"
-                          onClick={handleSaveNotes}
-                        >
-                          Save Notes
-                        </Button>
-                      </Field>
-
-                      <Separator />
-
-                      <div className="text-muted-foreground space-y-1 text-sm">
-                        <div className="flex justify-between">
-                          <span>Submitted</span>
-                          <span>{formatDate(selected.createdAt)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Last updated</span>
-                          <span>{formatDate(selected.updatedAt)}</span>
+                        <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
+                          <PhoneIcon className="size-3" aria-hidden="true" />
+                          {form.mobile}
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ) : (
-                  <Card>
-                    <CardContent className="py-16 text-center">
-                      <MessageSquareIcon
-                        className="text-muted-foreground mx-auto mb-3 size-10"
-                        aria-hidden="true"
-                      />
-                      <p className="text-muted-foreground text-sm">
-                        Select a submission to view details
-                      </p>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
+                      <span
+                        className={cn(
+                          "rounded-full px-2 py-0.5 text-xs font-medium",
+                          statusConfig[form.status].className,
+                        )}
+                      >
+                        {statusConfig[form.status].label}
+                      </span>
+                    </div>
+                    <p className="text-muted-foreground mb-2 line-clamp-2 text-sm">
+                      {form.message}
+                    </p>
+                    <div className="text-muted-foreground flex items-center gap-1.5 text-xs">
+                      <CalendarIcon className="size-3" aria-hidden="true" />
+                      {formatDate(form.createdAt)}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           )}
         </TabsContent>
       </Tabs>
+
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+        <SheetContent side="right" className="w-full sm:max-w-lg overflow-y-auto">
+          {selected && (
+            <>
+              <SheetHeader className="pb-2">
+                <div className="flex items-center justify-between pr-8">
+                  <SheetTitle>{selected.name}</SheetTitle>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleDelete(selected.id)}
+                    aria-label="Delete submission"
+                  >
+                    <TrashIcon
+                      className="text-destructive size-4"
+                      aria-hidden="true"
+                    />
+                  </Button>
+                </div>
+              </SheetHeader>
+
+              <div className="space-y-5 px-4 pb-6">
+                <Field label="Email">
+                  <a
+                    href={`mailto:${selected.email}`}
+                    className="text-primary hover:underline"
+                  >
+                    {selected.email}
+                  </a>
+                </Field>
+
+                <Field label="Mobile">
+                  <a
+                    href={`tel:${selected.mobile}`}
+                    className="text-primary hover:underline"
+                  >
+                    {selected.mobile}
+                  </a>
+                </Field>
+
+                <Field label="Message">
+                  <div className="bg-muted rounded-md p-3 text-sm whitespace-pre-wrap">
+                    {selected.message}
+                  </div>
+                </Field>
+
+                <Field label="Status">
+                  <Select
+                    value={selected.status}
+                    onValueChange={(val) =>
+                      handleStatusChange(selected.id, val as ContactFormStatus)
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="PENDING">Pending</SelectItem>
+                      <SelectItem value="IN_PROGRESS">In Progress</SelectItem>
+                      <SelectItem value="RESOLVED">Resolved</SelectItem>
+                      <SelectItem value="CLOSED">Closed</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </Field>
+
+                <Field label="Admin Notes">
+                  <Textarea
+                    value={adminNotes}
+                    onChange={(e) => setAdminNotes(e.target.value)}
+                    rows={4}
+                    placeholder="Add internal notes…"
+                  />
+                  <Button
+                    size="sm"
+                    className="mt-2"
+                    onClick={handleSaveNotes}
+                  >
+                    Save Notes
+                  </Button>
+                </Field>
+
+                <Separator />
+
+                <div className="text-muted-foreground space-y-1 text-sm">
+                  <div className="flex justify-between">
+                    <span>Submitted</span>
+                    <span>{formatDate(selected.createdAt)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Last updated</span>
+                    <span>{formatDate(selected.updatedAt)}</span>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
@@ -359,7 +348,7 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-1">
+    <div className="space-y-1.5">
       <p className="text-muted-foreground text-sm font-medium">{label}</p>
       <div>{children}</div>
     </div>

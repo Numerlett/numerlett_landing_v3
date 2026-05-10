@@ -1,19 +1,8 @@
 import Link from "next/link";
 import { HelpCircleIcon, PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import { getFaqs } from "@/actions/faq";
-import { FaqStatus } from "@/database/types";
-import FaqDeleteButton from "@/components/admin/FaqDeleteButton";
-
-const statusConfig: Record<FaqStatus, { label: string; className: string }> = {
-  DRAFT: { label: "Draft", className: "bg-muted text-muted-foreground" },
-  PUBLISHED: {
-    label: "Published",
-    className: "bg-green-500/10 text-green-700 dark:text-green-400",
-  },
-};
+import FaqReorderList from "@/components/admin/FaqReorderList";
 
 export default async function FaqsPage() {
   const result = await getFaqs();
@@ -25,7 +14,7 @@ export default async function FaqsPage() {
         <div>
           <h1 className="text-3xl font-bold">FAQs</h1>
           <p className="text-muted-foreground">
-            Manage frequently asked questions shown on the landing page
+            Drag to reorder · changes save automatically
           </p>
         </div>
         <Button asChild size="sm" className="shrink-0 gap-1.5">
@@ -54,39 +43,7 @@ export default async function FaqsPage() {
           </Button>
         </div>
       ) : (
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <Card key={faq.id} className="transition-all hover:shadow-brand-md">
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="min-w-0 flex-1">
-                    <p className="font-semibold">{faq.question}</p>
-                    <p className="text-muted-foreground mt-1 line-clamp-2 text-sm">
-                      {faq.answer}
-                    </p>
-                    <p className="text-muted-foreground mt-1 text-xs">
-                      Order: {faq.order}
-                    </p>
-                  </div>
-                  <div className="flex shrink-0 items-center gap-2">
-                    <span
-                      className={cn(
-                        "rounded-full px-2 py-0.5 text-xs font-medium",
-                        statusConfig[faq.status].className,
-                      )}
-                    >
-                      {statusConfig[faq.status].label}
-                    </span>
-                    <Button asChild size="sm" variant="outline">
-                      <Link href={`/admin/faqs/${faq.id}`}>Edit</Link>
-                    </Button>
-                    <FaqDeleteButton id={faq.id} />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <FaqReorderList initialFaqs={faqs} />
       )}
     </div>
   );
