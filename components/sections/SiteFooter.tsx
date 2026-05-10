@@ -2,34 +2,38 @@ import { Leaf } from 'lucide-react'
 import { FaGithub, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 import Container from '@/components/Container'
 import Logo from '@/components/Logo'
+import Link from 'next/link'
+import { siteSocials } from '@/data'
 
-const techLinks = [
-  'Custom Software Development',
-  'Mobile App Development',
-  'AI & Machine Learning',
-  'Cloud & DevOps',
-  'Data Analytics & BI',
-  'Web Development',
-  'Cybersecurity',
-  'IT Consulting',
+type FooterLink = { label: string; href: string }
+
+const techLinks: FooterLink[] = [
+  { label: 'Custom Software Development', href: '/services/technical/custom-software' },
+  { label: 'Mobile App Development', href: '/services/technical/mobile-app' },
+  { label: 'AI & Machine Learning', href: '/services/technical/ai-ml' },
+  { label: 'Cloud & DevOps', href: '/services/technical/cloud-devops' },
+  { label: 'Data Analytics & BI', href: '/services/technical/data-analytics' },
+  { label: 'Web Development', href: '/services/technical/web-development' },
+  { label: 'Cybersecurity', href: '/services/technical/cybersecurity' },
+  { label: 'IT Consulting', href: '/services/technical/it-consulting' },
 ]
 
-const marketingLinks = [
-  'SEO & Organic Search',
-  'PPC & Paid Advertising',
-  'Content Marketing',
-  'Social Media Marketing',
-  'Brand Strategy',
-  'Email Marketing',
-  'Market Research',
-  'Digital Analytics',
+const marketingLinks: FooterLink[] = [
+  { label: 'SEO & Organic Search', href: '/services/marketing/seo' },
+  { label: 'PPC & Paid Advertising', href: '/services/marketing/ppc-advertising' },
+  { label: 'Content Marketing', href: '/services/marketing/content-marketing' },
+  { label: 'Social Media Marketing', href: '/services/marketing/social-media' },
+  { label: 'Brand Strategy', href: '/services/marketing/brand-strategy' },
+  { label: 'Email Marketing', href: '/services/marketing/email-marketing' },
+  { label: 'Market Research', href: '/services/marketing/market-research' },
+  { label: 'Digital Analytics', href: '/services/marketing/digital-analytics' },
 ]
 
 const socialLinks = [
-  { Icon: FaLinkedinIn, label: 'NumerLett on LinkedIn' },
-  { Icon: FaTwitter, label: 'NumerLett on Twitter' },
-  { Icon: FaGithub, label: 'NumerLett on GitHub' },
-  { Icon: FaInstagram, label: 'NumerLett on Instagram' },
+  { Icon: FaLinkedinIn, label: 'NumerLett on LinkedIn', href: siteSocials.linkedin },
+  { Icon: FaTwitter, label: 'NumerLett on Twitter', href: siteSocials.twitter },
+  { Icon: FaGithub, label: 'NumerLett on GitHub', href: siteSocials.github },
+  { Icon: FaInstagram, label: 'NumerLett on Instagram', href: siteSocials.instagram },
 ]
 
 export default function SiteFooter() {
@@ -49,10 +53,12 @@ export default function SiteFooter() {
               India's best businesses, one solution at a time.
             </p>
             <div className="mt-6 flex gap-3">
-              {socialLinks.map(({ Icon, label }) => (
+              {socialLinks.map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-[14px] text-text-muted transition-all hover:border-primary hover:bg-white/5 hover:text-primary"
                   aria-label={label}
                 >
@@ -75,11 +81,11 @@ export default function SiteFooter() {
             </h5>
             <div className="mt-4 border-t border-white/10 pt-4" />
             <ul className="mt-4 space-y-2 text-[14px] text-white/60">
-              {techLinks.map((link) => (
-                <li key={link}>
-                  <a href="#tech-services" className="transition-colors hover:text-primary">
-                    {link}
-                  </a>
+              {techLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <Link href={href} className="transition-colors hover:text-primary">
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -91,11 +97,11 @@ export default function SiteFooter() {
             </h5>
             <div className="mt-4 border-t border-white/10 pt-4" />
             <ul className="mt-4 space-y-2 text-[14px] text-white/60">
-              {marketingLinks.map((link) => (
-                <li key={link}>
-                  <a href="#mkt-services" className="transition-colors hover:text-primary">
-                    {link}
-                  </a>
+              {marketingLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <Link href={href} className="transition-colors hover:text-primary">
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -108,29 +114,29 @@ export default function SiteFooter() {
             <div className="mt-4 border-t border-white/10 pt-4" />
             <ul className="mt-4 space-y-2 text-[14px] text-white/60">
               <li>
-                <a href="#seed" className="inline-flex items-center gap-1.5 font-semibold text-primary">
+                <Link href="/#seed" className="inline-flex items-center gap-1.5 font-semibold text-primary">
                   <Leaf className="size-3.5" aria-hidden="true" /> SEED - Inventory System
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#cases" className="transition-colors hover:text-primary">
+                <Link href="/#cases" className="transition-colors hover:text-primary">
                   Case Studies
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#blog" className="transition-colors hover:text-primary">
+                <Link href="/#blog" className="transition-colors hover:text-primary">
                   Insights & Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#faq" className="transition-colors hover:text-primary">
+                <Link href="/#faq" className="transition-colors hover:text-primary">
                   About NumerLett
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="transition-colors hover:text-primary">
+                <Link href="/#contact" className="transition-colors hover:text-primary">
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="transition-colors hover:text-primary">

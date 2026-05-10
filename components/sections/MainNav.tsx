@@ -19,7 +19,6 @@ import {
 import Container from "@/components/Container";
 import Logo from "@/components/Logo";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -58,25 +57,25 @@ const serviceGroups: ServiceGroup[] = [
         Icon: Code2,
         label: "Software Development",
         sub: "Custom web, mobile & enterprise apps",
-        href: "#tech-services",
+        href: "/services/technical/custom-software",
       },
       {
         Icon: Bot,
         label: "AI & ML Solutions",
         sub: "Intelligent automation & data models",
-        href: "#tech-services",
+        href: "/services/technical/ai-ml",
       },
       {
         Icon: Cloud,
         label: "Cloud & DevOps",
         sub: "Scalable infrastructure & CI/CD",
-        href: "#tech-services",
+        href: "/services/technical/cloud-devops",
       },
       {
         Icon: BarChart3,
         label: "Data Analytics",
         sub: "BI dashboards & market intelligence",
-        href: "#tech-services",
+        href: "/services/technical/data-analytics",
       },
     ],
   },
@@ -87,25 +86,25 @@ const serviceGroups: ServiceGroup[] = [
         Icon: Search,
         label: "SEO & SEM",
         sub: "Rank higher, acquire more customers",
-        href: "#mkt-services",
+        href: "/services/marketing/seo",
       },
       {
         Icon: Megaphone,
         label: "Digital Marketing",
         sub: "Full-funnel performance campaigns",
-        href: "#mkt-services",
+        href: "/services/marketing/ppc-advertising",
       },
       {
         Icon: PenLine,
         label: "Content & Brand",
         sub: "Strategy, storytelling & identity",
-        href: "#mkt-services",
+        href: "/services/marketing/content-marketing",
       },
       {
         Icon: TrendingUp,
         label: "Market Research",
         sub: "Intelligence-driven growth insights",
-        href: "#mkt-services",
+        href: "/services/marketing/market-research",
       },
     ],
   },
@@ -118,10 +117,10 @@ const productLinks: ProductLink[] = [
 ];
 
 const navLinks: NavLink[] = [
-  { label: "Case Studies", href: "#cases" },
-  { label: "Insights", href: "#blog" },
-  { label: "About", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Case Studies", href: "/#cases" },
+  { label: "Insights", href: "/#blog" },
+  { label: "About", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const linkClass = cn(
@@ -131,7 +130,6 @@ const linkClass = cn(
 );
 
 export default function MainNav() {
-  const pathname = usePathname();
   const [expanded, setExpanded] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);

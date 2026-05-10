@@ -16,3 +16,24 @@ export interface IContactForm {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export enum ArticleStatus {
+  DRAFT = "DRAFT",
+  PUBLISHED = "PUBLISHED",
+  ARCHIVED = "ARCHIVED",
+}
+
+export interface IArticle {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string | null;
+  status: ArticleStatus;
+  tags: string[];
+  coverImage: string | null;
+  author: string;
+  publishedAt: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
