@@ -1,8 +1,23 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import Container from "@/components/Container";
+
+const answerVariants: Variants = {
+  collapsed: { height: 0, opacity: 0 },
+  open: {
+    height: "auto",
+    opacity: 1,
+    transition: { height: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.2, delay: 0.05 } },
+  },
+  exit: {
+    height: 0,
+    opacity: 0,
+    transition: { height: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.15 } },
+  },
+};
 
 type Faq = { question: string; answer: string };
 
@@ -41,6 +56,7 @@ const faqs: Faq[] = [
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0);
+  const reduced = useReducedMotion();
 
   return (
     <section className="bg-background py-24" id="faq" aria-labelledby="faq-heading">
@@ -83,20 +99,33 @@ export default function FaqSection() {
                       aria-expanded={isOpen}
                     >
                       {faq.question}
-                      <span
-                        className={`flex h-7 w-7 items-center justify-center rounded-full border border-border-dark text-text-muted transition-all ${
-                          isOpen ? "rotate-45 border-primary bg-primary text-primary-foreground" : ""
+                      <motion.span
+                        animate={{ rotate: isOpen ? 45 : 0 }}
+                        transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 25 }}
+                        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border-dark text-text-muted transition-colors ${
+                          isOpen ? "border-primary bg-primary text-primary-foreground" : ""
                         }`}
                         aria-hidden="true"
                       >
                         <Plus className="h-4 w-4" />
-                      </span>
+                      </motion.span>
                     </button>
-                    {isOpen && (
-                      <div className="pb-5 text-[14.5px] font-light leading-[1.8] text-muted-foreground">
-                        {faq.answer}
-                      </div>
-                    )}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key="answer"
+                          variants={reduced ? undefined : answerVariants}
+                          initial="collapsed"
+                          animate="open"
+                          exit="exit"
+                          style={{ overflow: "hidden" }}
+                        >
+                          <div className="pb-5 text-[14.5px] font-light leading-[1.8] text-muted-foreground">
+                            {faq.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               })}

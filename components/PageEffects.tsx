@@ -1,10 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 const REVEAL_SELECTOR = '.reveal, .reveal-left, .reveal-right'
 
 export default function PageEffects() {
+  const pathname = usePathname()
+
   useEffect(() => {
     const revealTargets = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR))
 
@@ -99,7 +102,7 @@ export default function PageEffects() {
       skillObserver.disconnect()
       document.removeEventListener('click', handleAnchorClick)
     }
-  }, [])
+  }, [pathname])
 
   return null
 }
