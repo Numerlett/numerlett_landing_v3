@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { Loader2Icon, LogOutIcon, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 
 function getInitials(email: string): string {
@@ -40,6 +41,7 @@ export default function AdminHeader({
   const initials = email ? getInitials(email) : "AD";
 
   const [signingOut, startSignOut] = useTransition();
+  const router = useRouter();
 
   return (
     <header
@@ -91,7 +93,8 @@ export default function AdminHeader({
             <DropdownMenuItem
               onSelect={() => {
                 startSignOut(async () => {
-                  await signOut({ callbackUrl: "/login" });
+                  await signOut({ redirect: false });
+                  router.refresh();
                 });
               }}
               disabled={signingOut}

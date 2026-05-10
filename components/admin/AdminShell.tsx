@@ -15,7 +15,7 @@ export default function AdminShell({
 
   return (
     <NextAuthSessionProviders>
-      <div className="bg-background text-foreground flex min-h-dvh flex-row">
+      <div className="bg-background text-foreground flex h-dvh flex-row overflow-hidden">
         <AdminSidebar expanded={expanded} className="hidden md:flex" />
         <div className="flex flex-1 flex-col">
           <AdminHeader

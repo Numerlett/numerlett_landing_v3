@@ -4,16 +4,19 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Loader2Icon, LogOutIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 
 export default function SignOutButton({ className }: { className?: string }) {
   const [signingOut, startSignOut] = useTransition();
+  const router = useRouter();
 
   return (
     <Button
       onClick={() => {
         startSignOut(async () => {
-          await signOut({ callbackUrl: "/login" });
+          await signOut({ redirect: false });
+          router.refresh();
         });
       }}
       disabled={signingOut}
