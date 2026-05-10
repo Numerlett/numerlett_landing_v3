@@ -75,7 +75,7 @@ export async function createArticle(data: {
       author: data.author ?? "Admin",
     });
 
-    revalidatePath("/admin/articles");
+    revalidatePath("/", "layout");
     return { success: true, data: serialize(doc) };
   } catch {
     return { success: false, error: "Failed to create article" };
@@ -111,8 +111,7 @@ export async function updateArticle(
       { new: true },
     );
 
-    revalidatePath("/admin/articles");
-    revalidatePath(`/admin/articles/${id}/edit`);
+    revalidatePath("/", "layout");
     return { success: true, data: doc ? serialize(doc) : null };
   } catch {
     return { success: false, error: "Failed to update article" };
@@ -123,7 +122,7 @@ export async function deleteArticle(id: string) {
   try {
     await connectDB();
     await ArticleModel.findByIdAndDelete(id);
-    revalidatePath("/admin/articles");
+    revalidatePath("/", "layout");
     return { success: true };
   } catch {
     return { success: false, error: "Failed to delete article" };
