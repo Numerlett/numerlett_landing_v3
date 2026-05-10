@@ -37,3 +37,18 @@ export interface IArticle {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export enum FaqStatus {
+  DRAFT = "DRAFT",
+  PUBLISHED = "PUBLISHED",
+}
+
+export interface IFaq {
+  id: string;
+  question: string;
+  answer: string;
+  status: FaqStatus;
+  order: number;
+  createdAt: Date;
+  updatedAt: Date;
+}

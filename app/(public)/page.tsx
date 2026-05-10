@@ -13,8 +13,13 @@ import StatsBar from "@/components/sections/StatsBar";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import TickerBar from "@/components/sections/TickerBar";
 import WhySection from "@/components/sections/WhySection";
+import { getFaqs } from "@/actions/faq";
+import { FaqStatus } from "@/database/types";
 
-export default function Home() {
+export default async function Home() {
+  const faqResult = await getFaqs(FaqStatus.PUBLISHED);
+  const faqs = faqResult.success && faqResult.data ? faqResult.data : [];
+
   return (
     <>
       <StructuredData />
@@ -29,7 +34,7 @@ export default function Home() {
         <IndustriesSection />
         <CaseStudiesSection />
         <TestimonialsSection />
-        <FaqSection />
+        <FaqSection faqs={faqs} />
         <BlogSection />
         <CtaSection />
         <ContactSection />
@@ -37,3 +42,4 @@ export default function Home() {
     </>
   );
 }
+

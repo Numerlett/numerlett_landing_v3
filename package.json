@@ -10,7 +10,8 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:seed": "tsx database/seed.ts"
+    "db:seed": "tsx database/seed.ts",
+    "db:seed-faqs": "tsx database/seed-faqs.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
