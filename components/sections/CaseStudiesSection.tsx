@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Container from "@/components/Container";
 
 type Metric = { value: string; label: string };
@@ -6,9 +7,7 @@ type CaseStudy = {
   tag: string;
   title: string;
   description: string;
-  imageLabel: string;
-  imageBg: string;
-  imageColor: string;
+  imageSrc: string;
   metrics: Metric[];
 };
 
@@ -18,9 +17,7 @@ const cases: CaseStudy[] = [
     title: "D2C Fashion Brand: From Page 5 to Position #1",
     description:
       "A Bengaluru-based fashion D2C brand approached us with near-zero organic traffic. In 8 months, we rewrote their content architecture, built 200+ backlinks, and optimized 1,200+ pages.",
-    imageLabel: "SEO + 148%",
-    imageBg: "bg-accent",
-    imageColor: "text-primary",
+    imageSrc: "/images/globe-with-laptop.jpeg",
     metrics: [
       { value: "148%", label: "Organic traffic growth" },
       { value: "#1", label: "Target keyword ranking" },
@@ -32,9 +29,7 @@ const cases: CaseStudy[] = [
     title: "Manufacturing Co: SEED Deployment Cuts Inventory Cost by 31%",
     description:
       "A mid-size manufacturer in Pune deployed SEED across 4 warehouses. AI demand forecasting eliminated ₹12L in overstock annually while reducing stockouts by 78%.",
-    imageLabel: "SaaS Built",
-    imageBg: "bg-[#f0f4ff]",
-    imageColor: "text-[#2563eb]",
+    imageSrc: "/images/tech-brain.jpeg",
     metrics: [
       { value: "31%", label: "Inventory cost reduction" },
       { value: "78%", label: "Stockout reduction" },
@@ -46,9 +41,7 @@ const cases: CaseStudy[] = [
     title: "EdTech Startup: 4.2x ROAS on Google Ads in 90 Days",
     description:
       "An edtech startup burning money on unoptimized Google Ads came to us. We rebuilt the campaign architecture, tightened audience targeting, and introduced dynamic search ads.",
-    imageLabel: "4.2x ROAS",
-    imageBg: "bg-[#fff8e8]",
-    imageColor: "text-[#d97706]",
+    imageSrc: "/images/business-strategy.jpeg",
     metrics: [
       { value: "4.2x", label: "Return on Ad Spend" },
       { value: "60%", label: "CPA reduction" },
@@ -60,9 +53,7 @@ const cases: CaseStudy[] = [
     title: "FinTech App: 0 to 50K Users in 6 Months",
     description:
       "We designed and developed a cross-platform investment tracking app from scratch. Combined with an aggressive ASO and content marketing strategy, it hit 50K downloads in 6 months.",
-    imageLabel: "App Built",
-    imageBg: "bg-[#f0fdf4]",
-    imageColor: "text-primary",
+    imageSrc: "/images/human-with-dog.jpeg",
     metrics: [
       { value: "50K", label: "App downloads" },
       { value: "4.8★", label: "App Store rating" },
@@ -106,12 +97,14 @@ export default function CaseStudiesSection() {
               itemScope
               itemType="https://schema.org/Article"
             >
-              <div className={`aspect-4/3 ${item.imageBg} flex items-center justify-center`}>
-                <span
-                  className={`font-display text-[20px] font-black tracking-[-1px] ${item.imageColor}`}
-                >
-                  {item.imageLabel}
-                </span>
+              <div className="relative aspect-4/3 flex items-center justify-center bg-muted">
+                <Image
+                  src={item.imageSrc}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
               </div>
               <div className="p-6 sm:p-7">
                 <span
