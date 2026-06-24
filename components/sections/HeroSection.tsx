@@ -82,7 +82,7 @@ export default function HeroSection() {
               <br />
               Business
               <br />
-              <span className="outline-text">Begins.</span>
+              <span>Begins.</span>
             </h1>
             <p className="reveal text-muted-foreground mt-7 max-w-145 text-[18px] leading-[1.75] font-light delay-2">
               End-to-end <strong>Technology Services</strong>,{" "}
