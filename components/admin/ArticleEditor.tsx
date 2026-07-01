@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useEffect, useCallback, useRef } from "react";
+import { useState, useTransition, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { type Variants, motion } from "framer-motion";
 import { useReducedMotion } from "framer-motion";
@@ -101,6 +101,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
   // Update "saved X ago" every 15 seconds
   useEffect(() => {
     if (!lastSaved) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRelativeTime(formatRelativeTime(lastSaved));
     const id = setInterval(
       () => setRelativeTime(formatRelativeTime(lastSaved)),
@@ -136,10 +137,9 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
     saveStateRef.current = { title, content, excerpt, status, tags, coverImage };
   }, [title, content, excerpt, status, tags, coverImage]);
 
-  const handleSave = useCallback(
-    (overrideStatus?: ArticleStatus) => {
-      const { title, content, excerpt, status, tags, coverImage } =
-        saveStateRef.current;
+  const handleSave = (overrideStatus?: ArticleStatus) => {
+    const { title, content, excerpt, status, tags, coverImage } =
+      saveStateRef.current;
 
       if (!title.trim()) {
         toast.error("Title is required");
@@ -193,10 +193,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
           }
         }
       });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isEditing, article?.id, router],
-  );
+    };
 
   // Cmd+S / Ctrl+S keyboard shortcut
   useEffect(() => {
@@ -208,6 +205,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleSave]);
 
   const handleDelete = () => {

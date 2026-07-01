@@ -31,6 +31,7 @@ export type ServiceDetail = {
   process: Array<{ title: string; description: string }>
   useCases: string[]
   highlights: ServiceHighlight[]
+  imageSrc?: string
 }
 
 export const techServices: ServiceDetail[] = [
@@ -42,6 +43,7 @@ export const techServices: ServiceDetail[] = [
       'We architect, build, and scale digital products from the ground up. Whether it\'s an internal tool replacing spreadsheets, a SaaS platform serving thousands, or a mission-critical enterprise system, we deliver software that becomes a competitive advantage — not a maintenance burden.',
     Icon: Code2,
     category: 'technical',
+    imageSrc: '/images/custom-software.png',
     timeline: '8–20 weeks',
     deliverables: [
       'Functional specification & architecture document',
@@ -109,6 +111,7 @@ export const techServices: ServiceDetail[] = [
       'Design system & reusable component library',
       '90-day post-launch bug warranty',
     ],
+    imageSrc: '/images/human-with-dog.jpeg',
     process: [
       {
         title: 'Platform Strategy',
@@ -165,6 +168,7 @@ export const techServices: ServiceDetail[] = [
       'Model card and full technical documentation',
       'Retraining runbook for your team',
     ],
+    imageSrc: '/images/tech-brain.jpeg',
     process: [
       {
         title: 'Problem Framing',
@@ -222,6 +226,7 @@ export const techServices: ServiceDetail[] = [
       'Cloud cost optimization report',
       'Disaster recovery plan and runbook',
     ],
+    imageSrc: '/images/building-road.jpeg',
     process: [
       {
         title: 'Audit & Assessment',
@@ -278,6 +283,7 @@ export const techServices: ServiceDetail[] = [
       'KPI dictionary and data dictionary',
       'Self-serve analytics onboarding and training',
     ],
+    imageSrc: '/images/man-using-dashboard.jpeg',
     process: [
       {
         title: 'Metric Definition',
@@ -335,6 +341,7 @@ export const techServices: ServiceDetail[] = [
       'Contact forms, lead capture, and CRM connection',
       '30-day post-launch support',
     ],
+    imageSrc: '/images/globe-with-laptop.jpeg',
     process: [
       {
         title: 'Brand & Goals Alignment',
@@ -383,6 +390,7 @@ export const techServices: ServiceDetail[] = [
     Icon: ShieldCheck,
     category: 'technical',
     timeline: '2–6 weeks',
+    imageSrc: '/images/cybersecurity.png',
     deliverables: [
       'Penetration testing report (executive and technical sections)',
       'Vulnerability severity ranking by CVSS score',
@@ -447,6 +455,7 @@ export const techServices: ServiceDetail[] = [
       'Technical risk register',
       'Up to three facilitated workshop sessions',
     ],
+    imageSrc: '/images/business-strategy.jpeg',
     process: [
       {
         title: 'Stakeholder Interviews',
@@ -506,6 +515,7 @@ export const marketingServices: ServiceDetail[] = [
       'Backlink profile audit and link-building campaign',
       'Monthly performance report with ranking movement data',
     ],
+    imageSrc: '/images/seo-aeo-geo.jpeg',
     process: [
       {
         title: 'Technical Audit',
@@ -563,6 +573,7 @@ export const marketingServices: ServiceDetail[] = [
       'Bid strategy and budget allocation optimization',
       'Monthly strategy review and next-period plan',
     ],
+    imageSrc: '/images/up-chart.jpeg',
     process: [
       {
         title: 'Account Audit',
@@ -611,6 +622,7 @@ export const marketingServices: ServiceDetail[] = [
     Icon: PenLine,
     category: 'marketing',
     timeline: '2–3 weeks to first content, ongoing monthly',
+    imageSrc: '/images/content-marketing.png',
     deliverables: [
       'Content strategy and 90-day editorial calendar',
       'Keyword-to-content mapping and topic prioritization',
@@ -676,6 +688,7 @@ export const marketingServices: ServiceDetail[] = [
       'Influencer and partnership identification list',
       'Monthly analytics report tied to business metrics',
     ],
+    imageSrc: '/images/parrots.jpeg',
     process: [
       {
         title: 'Audit & Strategy',
@@ -733,6 +746,7 @@ export const marketingServices: ServiceDetail[] = [
       'Tone of voice playbook with examples',
       'Core asset kit (email signature, social profiles, and letterhead)',
     ],
+    imageSrc: '/images/triangle.jpeg',
     process: [
       {
         title: 'Discovery & Research',
@@ -781,6 +795,7 @@ export const marketingServices: ServiceDetail[] = [
     Icon: Mail,
     category: 'marketing',
     timeline: '3–4 weeks to first send, ongoing monthly',
+    imageSrc: '/images/email-marketing.png',
     deliverables: [
       'Email strategy and list segmentation plan',
       'Welcome and onboarding sequence',
@@ -838,6 +853,7 @@ export const marketingServices: ServiceDetail[] = [
     Icon: LineChart,
     category: 'marketing',
     timeline: '2–6 weeks',
+    imageSrc: '/images/market-research.png',
     deliverables: [
       'Market sizing report (TAM, SAM, and SOM)',
       'Competitive landscape analysis with positioning map',
@@ -894,6 +910,7 @@ export const marketingServices: ServiceDetail[] = [
     Icon: BarChart3,
     category: 'marketing',
     timeline: '3–5 weeks',
+    imageSrc: '/images/digital-analytics.png',
     deliverables: [
       'Analytics audit report with data quality findings',
       'GA4 or Mixpanel setup with complete event taxonomy',

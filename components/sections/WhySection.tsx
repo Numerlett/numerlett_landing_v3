@@ -59,7 +59,7 @@ export default function WhySection() {
             </h2>
             <p className="reveal delay-2 mt-4 text-[16px] font-light leading-[1.75] text-muted-foreground">
               Most agencies do either tech or marketing. We do both — and we make them work
-              together. That's the unfair advantage we give our clients.
+              together. That&apos;s the unfair advantage we give our clients.
             </p>
             <div className="reveal delay-2 mt-6 border-t border-border">
               {reasons.map((reason) => (
@@ -111,13 +111,13 @@ export default function WhySection() {
               </div>
               <div className="mt-8 flex flex-col items-start gap-4 rounded-brand-md border border-primary-mid bg-accent px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                 <span className="text-[14px] font-semibold text-primary-dark">
-                  Ready to see what's possible for your business?
+                  Ready to see what&apos;s possible for your business?
                 </span>
                 <a
                   href="#contact"
                   className="inline-flex items-center gap-2 rounded-brand-sm border border-primary bg-primary px-4 py-2 text-[13px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
                 >
-                  Let's Talk <span className="text-base">→</span>
+                  Let&apos;s Talk <span className="text-base">→</span>
                 </a>
               </div>
             </div>

@@ -43,12 +43,12 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
             >
               Questions?
               <br />
-              We've Got
+              We&apos;ve Got
               <br />
               Answers.
             </h2>
             <p className="reveal delay-2 mt-4 text-[15px] font-light leading-[1.75] text-muted-foreground">
-              Can't find what you need?{" "}
+              Can&apos;t find what you need?{" "}
               <a href="#contact" className="font-semibold text-primary">
                 Talk to our team
               </a>{" "}

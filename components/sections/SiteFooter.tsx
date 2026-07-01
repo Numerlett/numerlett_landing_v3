@@ -50,7 +50,7 @@ export default function SiteFooter() {
             <Logo theme="dark" className="text-2xl" />
             <p className="mt-4 max-w-70 text-[14px] font-light leading-[1.7] text-text-muted">
               Where Technology meets Marketing, and Software creates competitive advantage. Building
-              India's best businesses, one solution at a time.
+              India&apos;s best businesses, one solution at a time.
             </p>
             <div className="mt-6 flex gap-3">
               {socialLinks.map(({ Icon, label, href }) => (
@@ -138,28 +138,13 @@ export default function SiteFooter() {
                   Contact Us
                 </Link>
               </li>
-              <li>
-                <a href="#" className="transition-colors hover:text-primary">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="transition-colors hover:text-primary">
-                  Partner Program
-                </a>
-              </li>
-              <li>
-                <a href="#" className="transition-colors hover:text-primary">
-                  Press Kit
-                </a>
-              </li>
             </ul>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 py-6">
           <p className="text-[13px] text-white/30">
-            © 2025 NumerLett. All rights reserved. Registered in India.
+            © 2026 NumerLett. All rights reserved. Registered in India.
           </p>
           <div className="flex flex-wrap gap-6 text-[13px] text-white/30">
             <a href="#" className="transition-colors hover:text-white">

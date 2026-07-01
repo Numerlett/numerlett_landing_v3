@@ -144,7 +144,7 @@ export default function SeedSection() {
               itemProp="description"
             >
               <strong className="text-white">SEED</strong> (Smart Enterprise
-              Efficiency & Distribution) is NumerLett's flagship AI-powered
+              Efficiency &amp; Distribution) is NumerLett&apos;s flagship AI-powered
               Inventory Management System — built to eliminate stockouts, reduce
               overhead, and give you complete supply chain visibility.
             </p>

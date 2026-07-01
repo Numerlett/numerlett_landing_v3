@@ -53,6 +53,7 @@ export default function FaqForm({ faq }: FaqFormProps) {
     },
   });
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const status = watch("status");
 
   const onSubmit = (values: FaqFormValues) => {

@@ -80,12 +80,12 @@ export default function ContactSection() {
               id="contact-heading"
               className="reveal font-display mt-4 text-[clamp(32px,4vw,52px)] leading-[1.1] font-bold tracking-[-1.5px] delay-1"
             >
-              Let's Start
+              Let&apos;s Start
               <br />
               Something Big.
             </h2>
             <p className="reveal text-muted-foreground mt-4 text-[16px] leading-[1.75] font-light delay-2">
-              Tell us what you need — tech, marketing, SEED, or all three. We'll
+              Tell us what you need — tech, marketing, SEED, or all three. We&apos;ll
               get back to you within 24 hours.
             </p>
 
@@ -124,7 +124,7 @@ export default function ContactSection() {
                   </div>
                   <p className="text-[17px] font-semibold">Message Sent!</p>
                   <p className="text-muted-foreground text-[14px]">
-                    We'll get back to you within 24 hours.
+                    We&apos;ll get back to you within 24 hours.
                   </p>
                 </div>
               ) : (

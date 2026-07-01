@@ -3,6 +3,7 @@
 import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
 import { ArrowLeft, Check, Clock } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRef } from 'react'
 import Container from '@/components/Container'
 import { Button } from '@/components/ui/button'
@@ -88,7 +89,6 @@ export default function ServicePage({
   slug: string
   category: 'technical' | 'marketing'
 }) {
-  const reduced = useReducedMotion()
   const services = category === 'technical' ? techServices : marketingServices
   const service = services.find((s) => s.slug === slug) as ServiceDetail
 
@@ -99,7 +99,26 @@ export default function ServicePage({
   return (
     <main>
       {/* ── Hero ──────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-foreground pb-20 pt-16 text-background">
+      <section className="relative overflow-hidden bg-black pb-20 pt-16">
+        {/* hero background image */}
+        {service.imageSrc && (
+          <Image
+            src={service.imageSrc}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+            aria-hidden="true"
+          />
+        )}
+
+        {/* dark overlay so text stays legible */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-black/50"
+          aria-hidden="true"
+        />
+
         {/* sweep accent line */}
         <motion.div
           variants={sweepVariants}
@@ -111,63 +130,65 @@ export default function ServicePage({
 
         {/* subtle dot grid */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
           style={{
-            backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
           aria-hidden="true"
         />
 
-        <Container>
-          <motion.div
-            variants={heroVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {/* breadcrumb */}
-            <motion.div variants={heroItemVariants}>
-              <Link
-                href={backHref}
-                className="inline-flex items-center gap-2 text-[13px] font-medium text-background/60 transition-colors hover:text-background"
-              >
-                <ArrowLeft className="size-3.5" aria-hidden="true" />
-                {categoryLabel}
-              </Link>
-            </motion.div>
-
-            {/* icon */}
+        <div className="relative z-10">
+          <Container>
             <motion.div
-              variants={heroItemVariants}
-              className="mt-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary"
+              variants={heroVariants}
+              initial="hidden"
+              animate="visible"
             >
-              <Icon className="size-8 text-primary-foreground" aria-hidden="true" />
+              {/* breadcrumb */}
+              <motion.div variants={heroItemVariants}>
+                <Link
+                  href={backHref}
+                  className="inline-flex items-center gap-2 text-[13px] font-medium text-white/60 transition-colors hover:text-white"
+                >
+                  <ArrowLeft className="size-3.5" aria-hidden="true" />
+                  {categoryLabel}
+                </Link>
+              </motion.div>
+
+              {/* icon */}
+              <motion.div
+                variants={heroItemVariants}
+                className="mt-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary"
+              >
+                <Icon className="size-8 text-primary-foreground" aria-hidden="true" />
+              </motion.div>
+
+              {/* headline */}
+              <motion.h1
+                variants={heroItemVariants}
+                className="mt-6 font-display text-[clamp(32px,5vw,60px)] font-bold leading-[1.05] tracking-[-2px] text-white"
+              >
+                {title}
+              </motion.h1>
+
+              <motion.p
+                variants={heroItemVariants}
+                className="mt-4 max-w-2xl text-[18px] font-light leading-[1.7] text-white/70"
+              >
+                {tagline}
+              </motion.p>
+
+              {/* timeline badge */}
+              <motion.div variants={heroItemVariants} className="mt-8">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[13px] font-medium text-white/80">
+                  <Clock className="size-3.5" aria-hidden="true" />
+                  Typical timeline: {timeline}
+                </span>
+              </motion.div>
             </motion.div>
-
-            {/* headline */}
-            <motion.h1
-              variants={heroItemVariants}
-              className="mt-6 font-display text-[clamp(32px,5vw,60px)] font-bold leading-[1.05] tracking-[-2px] text-background"
-            >
-              {title}
-            </motion.h1>
-
-            <motion.p
-              variants={heroItemVariants}
-              className="mt-4 max-w-2xl text-[18px] font-light leading-[1.7] text-background/70"
-            >
-              {tagline}
-            </motion.p>
-
-            {/* timeline badge */}
-            <motion.div variants={heroItemVariants} className="mt-8">
-              <span className="inline-flex items-center gap-2 rounded-full border border-background/20 bg-background/10 px-4 py-2 text-[13px] font-medium text-background/80">
-                <Clock className="size-3.5" aria-hidden="true" />
-                Typical timeline: {timeline}
-              </span>
-            </motion.div>
-          </motion.div>
-        </Container>
+          </Container>
+        </div>
       </section>
 
       {/* ── Highlights bar ────────────────────────────────────────── */}
@@ -213,7 +234,7 @@ export default function ServicePage({
 
             <AnimatedSection>
               <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-primary">
-                Who it's for
+                Who it&apos;s for
               </p>
               <h3 className="mt-3 font-display text-[20px] font-bold tracking-[-0.5px]">
                 Ideal for
@@ -249,7 +270,7 @@ export default function ServicePage({
               Deliverables
             </p>
             <h2 className="mt-3 font-display text-[clamp(24px,3vw,36px)] font-bold leading-[1.15] tracking-[-1px]">
-              What's included
+              What&apos;s included
             </h2>
             <p className="mt-3 text-[15px] text-muted-foreground">
               Everything below is part of a standard engagement. No hidden extras.
@@ -341,7 +362,7 @@ export default function ServicePage({
               Ready to get started?
             </h2>
             <p className="mx-auto mt-4 max-w-md text-[16px] font-light leading-[1.75] text-primary-foreground/80">
-              Tell us about your project and we'll get back to you within 24 hours — no sales pitch,
+              Tell us about your project and we&apos;ll get back to you within 24 hours — no sales pitch,
               just a direct conversation.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

@@ -17,7 +17,7 @@ export default function CtaSection() {
           That Actually Ranks?
         </h2>
         <p className="reveal delay-1 mx-auto mt-4 max-w-130 text-[18px] font-light leading-[1.7] text-primary-foreground/80">
-          Let's talk tech, marketing, or SEED. No commitment needed — just a 30-minute strategy call
+          Let&apos;s talk tech, marketing, or SEED. No commitment needed — just a 30-minute strategy call
           to see where we can help.
         </p>
         <div className="reveal delay-2 mt-10 flex flex-wrap items-center justify-center gap-4">

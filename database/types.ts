@@ -52,3 +52,21 @@ export interface IFaq {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export enum TestimonialStatus {
+  DRAFT = "DRAFT",
+  PUBLISHED = "PUBLISHED",
+}
+
+export interface ITestimonial {
+  id: string;
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  status: TestimonialStatus;
+  order: number;
+  rating: number;
+  createdAt: Date;
+  updatedAt: Date;
+}

@@ -1,45 +1,62 @@
 import Container from '@/components/Container'
+import { getTestimonials } from '@/actions/testimonial'
+import { TestimonialStatus, type ITestimonial } from '@/database/types'
 
-type Testimonial = {
-  quote: string
-  name: string
-  role: string
-  initials: string
-  avatarBg: string
-  avatarColor: string
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <div className="mb-4 text-[16px] tracking-[2px] text-primary" aria-label={`${rating} out of 5 stars`}>
+      {'★'.repeat(rating)}{'☆'.repeat(5 - rating)}
+    </div>
+  )
 }
 
-const testimonials: Testimonial[] = [
-  {
-    quote:
-      '"NumerLett didn\'t just build our website — they made it rank. We went from invisible to the #1 position on Google for our main keywords in under 6 months. The ROI has been extraordinary."',
-    name: 'Arjun Patel',
-    role: 'CEO, FashionFirst India',
-    initials: 'AP',
-    avatarBg: 'bg-accent',
-    avatarColor: 'text-primary',
-  },
-  {
-    quote:
-      '"SEED transformed how we manage our 4 warehouses. What used to take 3 hours of spreadsheet hell is now real-time, automated, and accurate. Worth every rupee."',
-    name: 'Sneha Kulkarni',
-    role: 'Operations Head, MechPro Manufacturing',
-    initials: 'SK',
-    avatarBg: 'bg-[#e8f4ff]',
-    avatarColor: 'text-[#2563eb]',
-  },
-  {
-    quote:
-      '"They built our mobile app on time, within budget, and it hit 4.8 stars on the App Store. The team is rare — they think like founders, not contractors."',
-    name: 'Rohan Mehta',
-    role: 'Founder, InvestEasy App',
-    initials: 'RM',
-    avatarBg: 'bg-[#fff8e8]',
-    avatarColor: 'text-[#d97706]',
-  },
-]
+function TestimonialCard({ testimonial, index }: { testimonial: ITestimonial; index: number }) {
+  const initials = testimonial.name
+    .split(' ')
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase()
 
-export default function TestimonialsSection() {
+  const delayClass = index === 0 ? '' : `delay-${Math.min(index + 1, 4)}`
+
+  return (
+    <blockquote
+      className={`reveal ${delayClass} rounded-brand-md border border-border bg-white p-6 transition-all hover:border-primary-mid hover:shadow-brand-md sm:p-8`}
+      itemScope
+      itemType="https://schema.org/Review"
+    >
+      <StarRating rating={testimonial.rating} />
+      <p
+        className="mb-6 text-[14.5px] font-light leading-[1.8] text-muted-foreground"
+        itemProp="reviewBody"
+      >
+        &ldquo;{testimonial.quote}&rdquo;
+      </p>
+      <div className="flex items-center gap-3">
+        <div className="font-display flex h-10 w-10 items-center justify-center rounded-full bg-accent text-[14px] font-extrabold text-primary">
+          {initials}
+        </div>
+        <div>
+          <div className="text-[14px] font-bold" itemProp="author">
+            {testimonial.name}
+          </div>
+          <div className="text-[12px] text-text-muted">
+            {testimonial.role}
+            {testimonial.company && `, ${testimonial.company}`}
+          </div>
+        </div>
+      </div>
+    </blockquote>
+  )
+}
+
+export default async function TestimonialsSection() {
+  const result = await getTestimonials(TestimonialStatus.PUBLISHED)
+  const testimonials = result.success && result.data ? result.data : []
+
+  if (testimonials.length === 0) return null
+
   return (
     <section className="bg-muted py-24" aria-labelledby="testimonials-heading">
       <Container>
@@ -62,38 +79,7 @@ export default function TestimonialsSection() {
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <blockquote
-              key={testimonial.name}
-              className={`reveal ${index ? `delay-${index + 1}` : ''} rounded-brand-md border border-border bg-white p-6 transition-all hover:border-primary-mid hover:shadow-brand-md sm:p-8`}
-              itemScope
-              itemType="https://schema.org/Review"
-            >
-              <div
-                className="mb-4 text-[16px] tracking-[2px] text-primary"
-                aria-label="5 out of 5 stars"
-              >
-                ★★★★★
-              </div>
-              <p
-                className="mb-6 text-[14.5px] font-light leading-[1.8] text-muted-foreground"
-                itemProp="reviewBody"
-              >
-                {testimonial.quote}
-              </p>
-              <div className="flex items-center gap-3">
-                <div
-                  className={`font-display flex h-10 w-10 items-center justify-center rounded-full text-[14px] font-extrabold ${testimonial.avatarBg} ${testimonial.avatarColor}`}
-                >
-                  {testimonial.initials}
-                </div>
-                <div>
-                  <div className="text-[14px] font-bold" itemProp="author">
-                    {testimonial.name}
-                  </div>
-                  <div className="text-[12px] text-text-muted">{testimonial.role}</div>
-                </div>
-              </div>
-            </blockquote>
+            <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
           ))}
         </div>
       </Container>

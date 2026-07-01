@@ -1,4 +1,4 @@
-import { FileText, HelpCircle, LayoutDashboard, MessageSquare } from "lucide-react";
+import { FileText, HelpCircle, LayoutDashboard, MessageSquare, Quote } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export interface NavItem {
@@ -12,4 +12,5 @@ export const navItems: NavItem[] = [
   { label: "Contact", href: "/admin/contact", icon: MessageSquare },
   { label: "Articles", href: "/admin/articles", icon: FileText },
   { label: "FAQs", href: "/admin/faqs", icon: HelpCircle },
+  { label: "Testimonials", href: "/admin/testimonials", icon: Quote },
 ];
