@@ -1,5 +1,6 @@
 import StructuredData from "@/components/StructuredData";
 import BlogSection from "@/components/sections/BlogSection";
+import BuildingRoadSection from "@/components/sections/BuildingRoadSection";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import ContactSection from "@/components/sections/ContactSection";
 import CtaSection from "@/components/sections/CtaSection";
@@ -26,6 +27,7 @@ export default async function Home() {
       <main id="main-content">
         <HeroSection />
         <TickerBar />
+        <BuildingRoadSection />
         <StatsBar />
         <ServicesSection />
         <SeedSection />
