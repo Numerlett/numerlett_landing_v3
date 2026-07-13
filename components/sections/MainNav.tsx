@@ -239,6 +239,8 @@ export default function MainNav() {
                         <Link
                           key={label}
                           href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className={cn(
                             "hover:bg-accent flex gap-3 rounded-md p-2.5 transition-colors",
                             i < group.items.length - 1 && "mb-1",
@@ -302,6 +304,8 @@ export default function MainNav() {
                   <Link
                     key={label}
                     href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(
                       "flex items-center gap-2 rounded-md px-3.5 py-2",
                       "text-muted-foreground text-[13.5px] font-medium",
@@ -321,7 +325,7 @@ export default function MainNav() {
 
             {navLinks.map(({ label, href }) => (
               <li key={label}>
-                <Link href={href} className={linkClass}>
+                <Link href={href} className={linkClass} target="_blank" rel="noopener noreferrer">
                   {label}
                 </Link>
               </li>
@@ -342,6 +346,8 @@ export default function MainNav() {
             </Link>
             <Link
               href="#contact"
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 "border-primary bg-primary flex items-center gap-2 rounded-md border px-4 py-2",
                 "text-primary-foreground text-[13px] font-semibold",
@@ -425,6 +431,8 @@ export default function MainNav() {
                   <Link
                     key={label}
                     href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setExpanded(false)}
                     className={cn(
                       "flex items-center gap-2 px-6 py-2",
@@ -467,6 +475,8 @@ export default function MainNav() {
                 <Link
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setExpanded(false)}
                   className={cn(
                     "flex items-center gap-2 px-6 py-2",
@@ -487,6 +497,8 @@ export default function MainNav() {
             <Link
               key={label}
               href={href}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setExpanded(false)}
               className={cn(
                 "px-3 py-2",
@@ -515,6 +527,8 @@ export default function MainNav() {
             </Link>
             <Link
               href="#contact"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setExpanded(false)}
               className={cn(
                 "border-primary bg-primary flex items-center justify-center gap-2 rounded-md border px-4 py-2.5",
